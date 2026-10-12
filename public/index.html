@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CargoTracker - Transport & Logistics Solutions</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF3E41', // Signature Coral/Red
+                        secondary: '#0F172A', // Deep Slate Blue
+                        accentBlue: '#06B6D4', // Cyan/Blue from Free Quote
+                        lightBg: '#F8FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom fine-tunings to match the reference look precisely */
+        .primary-gradient {
+            background: linear-gradient(135deg, #FF3E41 0%, #E11D48 100%);
+        }
+        .hero-overlay {
+            background: rgba(15, 23, 42, 0.75);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-600 bg-white selection:bg-primary selection:text-white">
+
+    <!-- TOP HEADER / PHONE STRIP -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 lg:px-8 hidden md:flex justify-between items-center border-b border-slate-800 no-print">
+        <div class="flex items-center space-x-6">
+            <span class="flex items-center" data-i18n="topbar.location"><i class="fa-solid fa-map-marker-alt text-primary mr-2"></i> Brooklyn, New York, USA</span>
+            <span class="flex items-center"><i class="fa-solid fa-envelope text-primary mr-2"></i> info@cargotracker.org</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="#" class="hover:text-primary transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-primary transition-colors"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="hover:text-primary transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="hover:text-primary transition-colors"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </div>
+
+    <!-- MAIN STICKY NAVIGATION -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md transition-all duration-300 no-print">
+        <div class="max-w-7xl mx-auto flex items-center justify-between pr-4 lg:pr-8">
+            <!-- Brand Logo with Red Box Background -->
+            <a href="#" class="bg-primary text-white font-heading font-extrabold text-2xl lg:text-3xl px-6 lg:px-10 py-5 flex items-center tracking-wider hover:opacity-95 transition-opacity">
+                <i class="fa-solid fa-box-open mr-2 text-xl lg:text-2xl"></i> CargoTracker
+            </a>
+
+            <!-- Desktop Links (Removed Pricing & Team) -->
+            <div class="hidden lg:flex items-center space-x-8 font-heading font-semibold text-sm text-slate-800 tracking-wide uppercase">
+                <a href="#home" class="text-primary hover:text-primary transition-colors" data-i18n="nav.home">Home</a>
+                <a href="#tracker" class="hover:text-primary transition-colors" data-i18n="nav.track">Track</a>
+                <a href="#about" class="hover:text-primary transition-colors" data-i18n="nav.about">About</a>
+                <a href="#services" class="hover:text-primary transition-colors" data-i18n="nav.services">Services</a>
+                <a href="#quote" class="hover:text-primary transition-colors" data-i18n="nav.quote">Quote</a>
+                <a href="#testimonials" class="hover:text-primary transition-colors" data-i18n="nav.testimonial">Testimonial</a>
+                <a href="#contact" class="hover:text-primary transition-colors" data-i18n="nav.contact">Contact</a>
+            </div>
+
+                <!-- Desktop Language Selector Dropdown -->
+                <div class="relative inline-block text-left">
+                    <div>
+                        <button type="button" id="langDropdownBtn" class="inline-flex justify-center items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold font-heading uppercase text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none transition-all">
+                            <i class="fa-solid fa-globe text-primary text-sm"></i>
+                            <span id="currentLangLabel">English</span>
+                            <i class="fa-solid fa-chevron-down text-[9px] text-slate-400"></i>
+                        </button>
+                    </div>
+                    <div id="langDropdownMenu" class="absolute right-0 z-50 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden">
+                        <div class="py-1 font-heading font-semibold text-xs text-slate-700" role="none">
+                            <button onclick="setLanguage('en')" class="flex items-center w-full text-left px-4 py-2 hover:bg-slate-100 transition-colors">English (EN)</button>
+                            <button onclick="setLanguage('es')" class="flex items-center w-full text-left px-4 py-2 hover:bg-slate-100 transition-colors">Español (ES)</button>
+                            <button onclick="setLanguage('fr')" class="flex items-center w-full text-left px-4 py-2 hover:bg-slate-100 transition-colors">Français (FR)</button>
+                            <button onclick="setLanguage('de')" class="flex items-center w-full text-left px-4 py-2 hover:bg-slate-100 transition-colors">Deutsch (DE)</button>
+                            <button onclick="setLanguage('zh')" class="flex items-center w-full text-left px-4 py-2 hover:bg-slate-100 transition-colors">中文 (ZH)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Toggle -->
+            <button id="mobileMenuBtn" class="lg:hidden text-slate-800 text-2xl focus:outline-none p-2" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu (Removed Pricing & Team) -->
+        <div id="mobileDrawer" class="hidden lg:hidden bg-slate-900 border-t border-slate-800 transition-all duration-300">
+            <div class="flex flex-col space-y-4 p-6 font-heading font-semibold text-slate-200 tracking-wide uppercase">
+                <a href="#home" class="mobile-link text-primary hover:text-primary transition-colors" data-i18n="nav.home">Home</a>
+                <a href="#tracker" class="mobile-link hover:text-primary transition-colors" data-i18n="nav.track">Track</a>
+                <a href="#about" class="mobile-link hover:text-primary transition-colors" data-i18n="nav.about">About</a>
+                <a href="#services" class="mobile-link hover:text-primary transition-colors" data-i18n="nav.services">Services</a>
+                <a href="#quote" class="mobile-link hover:text-primary transition-colors" data-i18n="nav.quote">Quote</a>
+                <a href="#testimonials" class="mobile-link hover:text-primary transition-colors" data-i18n="nav.testimonial">Testimonial</a>
+                <a href="#contact" class="mobile-link hover:text-primary transition-colors" data-i18n="nav.contact">Contact</a>
+                
+                <!-- Mobile Language Selector -->
+                <div class="pt-3 border-t border-slate-800">
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2" data-i18n="nav.select_lang">Select Language</label>
+                    <select id="mobileLangSelect" onchange="setLanguage(this.value)" class="w-full bg-slate-800 text-white rounded px-3 py-2 text-xs font-semibold uppercase border border-slate-700 focus:outline-none focus:ring-1 focus:ring-primary">
+                        <option value="en">English (EN)</option>
+                        <option value="es">Español (ES)</option>
+                        <option value="fr">Français (FR)</option>
+                        <option value="de">Deutsch (DE)</option>
+                        <option value="zh">中文 (ZH)</option>
+                    </select>
+                </div>
+
+                <hr class="border-slate-800 my-2">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-phone-alt text-primary"></i>
+                    <a href="tel:+1 702 426 9645" class="font-bold text-white tracking-wide">+1 702 426 9645</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-[85vh] flex items-center justify-start bg-cover bg-center no-print" style="background-image: url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1920&q=80');">
+        <!-- Overlay background dark slate -->
+        <div class="absolute inset-0 hero-overlay"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 text-left w-full">
+            <div class="max-w-3xl">
+                <!-- Subtitle -->
+                <p class="text-primary font-heading font-bold text-sm sm:text-base tracking-widest uppercase mb-4 animate-bounce" data-i18n="hero.subtitle">
+                    Transport & Logistics Solution
+                </p>
+                <!-- Title matching layout -->
+                <h1 class="text-white font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-tight mb-6" data-i18n="hero.title">
+                    #1 Place For Your <span class="text-primary">Cargo</span> Solutions
+                </h1>
+                <!-- Sub-description -->
+                <p class="text-slate-300 text-base sm:text-lg mb-8 max-w-2xl leading-relaxed" data-i18n="hero.desc">
+                    Ensure bulletproof tracking and ultra-precise freight transport with our signature cargo intelligence system. We deliver confidence across sea, land, and sky.
+                </p>
+                <!-- Double CTA buttons -->
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#tracker" class="px-8 py-4 primary-gradient hover:opacity-90 text-white font-heading font-bold rounded shadow-lg text-center tracking-wide uppercase transition-all transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i> <span data-i18n="hero.btn_track">Track Package</span>
+                    </a>
+                    <a href="#quote" class="px-8 py-4 bg-accentBlue hover:opacity-90 text-white font-heading font-bold rounded shadow-lg text-center tracking-wide uppercase transition-all transform hover:-translate-y-0.5" data-i18n="hero.btn_quote">
+                        Free Quote
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE SHIPMENT TRACKING HUB -->
+    <section id="tracker" class="py-16 bg-slate-950 text-white border-t border-b border-slate-900 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+                
+                <!-- Background ambient design flare -->
+                <div class="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10 border-b border-slate-800 pb-8 mb-8">
+                    <!-- Text Info -->
+                    <div class="max-w-md">
+                        <span class="bg-primary/15 text-primary border border-primary/30 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full inline-flex items-center gap-1.5" data-i18n="tracker.telemetry">
+                            <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span> Live Global Telemetry
+                        </span>
+                        <h3 class="text-3xl font-heading font-extrabold text-white mt-4" data-i18n="tracker.title">Enterprise Cargo Tracking</h3>
+                        <p class="text-slate-400 text-sm mt-2 leading-relaxed" data-i18n="tracker.desc">
+                            Search cargo databases for instant active route logs. Enter your unique tracking ID created on the server Operations portal.
+                        </p>
+                    </div>
+
+                    <!-- Input Fields -->
+                    <div class="flex-grow max-w-xl">
+                        <form onsubmit="handleLiveTrack(event)" class="relative flex flex-col sm:flex-row gap-3">
+                            <div class="relative flex-grow">
+                                <i class="fa-solid fa-box-open absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                                <input type="text" id="trackingIDInput" required data-i18n-placeholder="tracker.placeholder" placeholder="e.g. SH-12345" class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-11 pr-4 py-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-mono tracking-wider text-white text-lg">
+                            </div>
+                            <button type="submit" class="px-8 py-4 bg-primary text-white font-heading font-bold uppercase tracking-wider rounded-lg hover:bg-rose-700 transition-colors flex items-center justify-center space-x-2 shrink-0">
+                                <i class="fa-solid fa-satellite-dish text-lg"></i>
+                                <span data-i18n="tracker.btn_locate">Locate Freight</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Dynamic Live Tracker Output Panel -->
+                <div id="trackingOutputPanel" class="hidden relative z-10 transition-all duration-500 animate-fadeIn">
+                    
+                    <!-- Top Status Strip -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                        <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block" data-i18n="tracker.col_waybill">Active Waybill</span>
+                            <p id="trackWaybillID" class="text-lg font-mono font-bold text-white mt-1">-</p>
+                        </div>
+                        <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block" data-i18n="tracker.col_service">Service Level</span>
+                            <p id="trackService" class="text-lg font-heading font-semibold text-sky-400 mt-1">-</p>
+                        </div>
+                        <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60 font-semibold">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block" data-i18n="tracker.col_checkpoint">Latest Checkpoint</span>
+                            <p id="trackLoc" class="text-lg text-slate-100 truncate mt-1">-</p>
+                        </div>
+                        <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block" data-i18n="tracker.col_delivery">Delivery Target</span>
+                            <p id="trackETA" class="text-lg font-heading font-bold text-primary mt-1">-</p>
+                        </div>
+                    </div>
+
+                    <!-- Visual Progress Nodes -->
+                    <div class="bg-slate-950/40 p-6 sm:p-8 rounded-2xl border border-slate-800/80 mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold uppercase text-slate-400 tracking-wider" data-i18n="tracker.pipeline">Transit Pipeline</span>
+                            <span id="trackStatusBadge" class="text-xs font-extrabold uppercase px-2.5 py-1 rounded"></span>
+                        </div>
+                        <div class="relative py-4">
+                            <!-- Horizontal Progress line connecting circles -->
+                            <div class="absolute top-[2.2rem] left-1/2 -translate-x-1/2 w-[85%] h-1 bg-slate-800 -z-0 hidden md:block" id="progressLineFill"></div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
+                                <!-- Step 1 -->
+                                <div class="text-center flex md:flex-col items-center gap-4 md:gap-0">
+                                    <div id="step1Circle" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 font-bold mb-2 transition-all">1</div>
+                                    <div class="text-left md:text-center">
+                                        <p class="font-heading font-bold text-sm text-white md:mt-1" data-i18n="tracker.step1">Manifest Sent</p>
+                                        <p id="step1Time" class="text-[11px] text-slate-500">Ready</p>
+                                    </div>
+                                </div>
+                                <!-- Step 2 -->
+                                <div class="text-center flex md:flex-col items-center gap-4 md:gap-0">
+                                    <div id="step2Circle" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 font-bold mb-2 transition-all">2</div>
+                                    <div class="text-left md:text-center">
+                                        <p class="font-heading font-bold text-sm text-white md:mt-1" data-i18n="tracker.step2">Freight Handover</p>
+                                        <p id="step2Time" class="text-[11px] text-slate-500">Pending</p>
+                                    </div>
+                                </div>
+                                <!-- Step 3 -->
+                                <div class="text-center flex md:flex-col items-center gap-4 md:gap-0">
+                                    <div id="step3Circle" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 font-bold mb-2 transition-all">3</div>
+                                    <div class="text-left md:text-center">
+                                        <p class="font-heading font-bold text-sm text-white md:mt-1" data-i18n="tracker.step3">In Transit</p>
+                                        <p id="step3Time" class="text-[11px] text-slate-500">Pending</p>
+                                    </div>
+                                </div>
+                                <!-- Step 4 -->
+                                <div class="text-center flex md:flex-col items-center gap-4 md:gap-0">
+                                    <div id="step4Circle" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 font-bold mb-2 transition-all">4</div>
+                                    <div class="text-left md:text-center">
+                                        <p class="font-heading font-bold text-sm text-white md:mt-1" data-i18n="tracker.step4">Out / Delivered</p>
+                                        <p id="step4Time" class="text-[11px] text-slate-500">Pending</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Split Panel -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                        <!-- Left Panel: Cargo Attributes & Telemetry Sensors -->
+                        <div class="lg:col-span-5 bg-slate-950/60 p-6 rounded-2xl border border-slate-800/80 space-y-6">
+                            <h4 class="font-heading font-extrabold text-base text-white border-b border-slate-800 pb-3"><i class="fa-solid fa-list-check text-primary mr-2"></i> <span data-i18n="tracker.inv_title">Cargo Inventory & Telemetry</span></h4>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div class="flex justify-between py-1 border-b border-slate-900">
+                                    <span class="text-slate-500" data-i18n="tracker.lbl_origin">Shipper / Origin</span>
+                                    <span id="trackShipper" class="text-slate-200 font-semibold text-right max-w-[180px] truncate block">-</span>
+                                </div>
+                                <div class="flex justify-between py-1 border-b border-slate-900">
+                                    <span class="text-slate-500" data-i18n="tracker.lbl_dest">Consignee / Destination</span>
+                                    <span id="trackReceiver" class="text-slate-200 font-semibold text-right max-w-[180px] truncate block">-</span>
+                                </div>
+                                <div class="flex justify-between py-1 border-b border-slate-900">
+                                    <span class="text-slate-500" data-i18n="tracker.lbl_weight">Gross Payload Weight</span>
+                                    <span id="trackWeight" class="text-slate-200 font-semibold font-mono">-</span>
+                                </div>
+                                <div class="flex justify-between py-1 border-b border-slate-900">
+                                    <span class="text-slate-500" data-i18n="tracker.lbl_dimensions">Dimensions (L×W×H)</span>
+                                    <span id="trackDimensions" class="text-slate-200 font-semibold font-mono">-</span>
+                                </div>
+                                <div class="flex justify-between py-1 border-b border-slate-900">
+                                    <span class="text-slate-500" data-i18n="tracker.lbl_sensor">Container Telemetry</span>
+                                    <span id="trackSensor" class="text-emerald-400 font-semibold flex items-center gap-1">
+                                        <i class="fa-solid fa-temperature-three-quarters animate-pulse"></i> -
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Styled Vector Barcode representation -->
+                            <div class="bg-white text-slate-950 p-4 rounded-xl text-center shadow-inner mt-4">
+                                <div id="trackBarcodeGraphic" class="font-mono text-2xl tracking-[0.25em] font-light select-none select-all">|||||| || | || |||| | | |||</div>
+                                <div class="text-[10px] text-slate-500 mt-2 font-mono tracking-wider uppercase font-semibold" data-i18n="tracker.barcode_lbl">Security Verification Barcode</div>
+                            </div>
+
+                            <!-- Action utilities -->
+                            <div class="pt-2 grid grid-cols-2 gap-3">
+                                <button onclick="triggerPODModal()" class="py-2.5 px-4 bg-slate-800 text-white hover:bg-slate-700 text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center justify-center gap-1.5 shadow">
+                                    <i class="fa-solid fa-file-invoice-dollar text-primary"></i> <span data-i18n="tracker.btn_manifest">Manifest Invoice</span>
+                                </button>
+                                <button onclick="triggerLiveChat()" class="py-2.5 px-4 bg-primary text-white hover:bg-rose-700 text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center justify-center gap-1.5 shadow">
+                                    <i class="fa-solid fa-headset"></i> <span data-i18n="tracker.btn_support">Support Desk</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel: Chronological Scan Timeline Ledger -->
+                        <div class="lg:col-span-7 bg-slate-950/60 p-6 rounded-2xl border border-slate-800/80">
+                            <h4 class="font-heading font-extrabold text-base text-white border-b border-slate-800 pb-3 mb-6"><i class="fa-solid fa-timeline text-primary mr-2"></i> <span data-i18n="tracker.ledger_title">Route Log Ledger</span></h4>
+                            
+                            <!-- Ledger timeline container -->
+                            <div id="timelineLedgerContainer" class="relative pl-6 border-l border-slate-800 space-y-6">
+                                <!-- Dynamic items loaded in via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPLORE SERVICES SECTION -->
+    <section id="services" class="py-20 lg:py-28 bg-lightBg no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header Text -->
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2" data-i18n="services.subtitle">Our Services</p>
+                <h2 class="text-secondary font-heading font-extrabold text-3xl sm:text-4xl" data-i18n="services.title">Explore Our Services</h2>
+                <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
+            </div>
+
+            <!-- Service Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Air Freight -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="Air Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Air+Freight'">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-heading font-bold text-secondary mb-3 group-hover:text-primary transition-colors" data-i18n="services.air_title">Air Freight</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow leading-relaxed" data-i18n="services.air_desc">
+                            Priority air transportation solutions utilizing scheduled flights and chartered cargo aircraft to guarantee rapid, time-critical delivery to global destinations.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ocean Freight -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1585713181935-d5f622cc2415?auto=format&fit=crop&w=600&q=80" alt="Ocean Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Ocean+Freight'">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-heading font-bold text-secondary mb-3 group-hover:text-primary transition-colors" data-i18n="services.ocean_title">Ocean Freight</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow leading-relaxed" data-i18n="services.ocean_desc">
+                            Cost-efficient ocean transportation for full container loads (FCL) and less-than-container loads (LCL), managed through strategic agreements with major global ocean carriers.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Road Freight -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=600&q=80" alt="Road Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Road+Freight'">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-heading font-bold text-secondary mb-3 group-hover:text-primary transition-colors" data-i18n="services.road_title">Road Freight</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow leading-relaxed" data-i18n="services.road_desc">
+                            Flexible long-haul trucking and door-to-door distribution services across extensive domestic networks, using GPS-tracked, modern, and temperature-controlled fleets.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Train Freight -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1592844002373-a55ecd7af140?auto=format&fit=crop&w=600&q=80" alt="Train Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Train+Freight'">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-heading font-bold text-secondary mb-3 group-hover:text-primary transition-colors" data-i18n="services.train_title">Train Freight</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow leading-relaxed" data-i18n="services.train_desc">
+                            Sustainable, high-capacity overland rail transit linking major industrial zones, providing an ideal balance between transit speed and shipping budget constraints.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customs Clearance -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1739877907105-2e578ee67bca?auto=format&fit=crop&w=600&q=80" alt="Customs Clearance" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Customs+Clearance'">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-heading font-bold text-secondary mb-3 group-hover:text-primary transition-colors" data-i18n="services.customs_title">Customs Clearance</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow leading-relaxed" data-i18n="services.customs_desc">
+                            Streamlined brokerage and compliance services managed by certified agents to fast-track import and export customs processing at air hubs, land borders, and ocean ports.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warehouse Solutions -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
+                    <div class="relative overflow-hidden h-52">
+                        <!-- High resolution, active warehouse fulfillment imagery -->
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Warehouse Solutions" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/800x600?text=Warehouse+Solutions'">
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-heading font-bold text-secondary mb-3 group-hover:text-primary transition-colors" data-i18n="services.warehouse_title">Warehouse Solutions</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow leading-relaxed" data-i18n="services.warehouse_desc">
+                            State-of-the-art secure storage with digital manifest control, advanced stock tracking, thermal containment options, and express dispatch docks.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#quote" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TWO-COLUMN ABOUT & TRUSTED LOGISTICS -->
+    <section id="about" class="py-20 lg:py-28 bg-white no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Column: Custom Delivery worker holding box -->
+                <div class="relative">
+                    <div class="relative z-10 rounded-lg overflow-hidden shadow-xl max-w-full lg:max-w-xl mx-auto">
+                        <img src="https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=800&q=80" alt="Quick Transport Solutions" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/800x600?text=Logistics+Delivery'">
+                    </div>
+                    <!-- Absolute Decorative Box behind image matching template styling -->
+                    <div class="absolute -bottom-6 -right-6 w-full h-full border-8 border-slate-100 rounded-lg -z-0 hidden md:block"></div>
+                </div>
+
+                <!-- Right Column: Text & Features -->
+                <div>
+                    <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2" data-i18n="about.subtitle">About Us</p>
+                    <h2 class="text-secondary font-heading font-extrabold text-3xl sm:text-4xl mb-6" data-i18n="about.title">Quick Transport and Cargo Solutions</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed font-normal" data-i18n="about.desc">
+                        At CargoTracker, we redefine international logistics through technology-driven transport networks, strict quality standards, and deep domain expertise. We build resilient supply chains that allow companies of all sizes to import, export, and scale globally with complete peace of mind.
+                    </p>
+
+                    <!-- Trust Cards inside About Section -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-slate-100 p-4 rounded-lg text-primary text-2xl">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-base font-heading font-bold text-secondary mb-1" data-i18n="about.card1_title">Global Coverage</h4>
+                                <p class="text-slate-500 text-xs leading-relaxed" data-i18n="about.card1_desc">Access over 180 countries through a deeply integrated multimodal partner network.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-slate-100 p-4 rounded-lg text-primary text-2xl">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-base font-heading font-bold text-secondary mb-1" data-i18n="about.card2_title">On Time Delivery</h4>
+                                <p class="text-slate-500 text-xs leading-relaxed" data-i18n="about.card2_desc">Achieving a consistent 99.4% on-time arrival rate through modern route optimization engines.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <a href="#services" class="inline-block px-8 py-4 bg-primary text-white font-heading font-bold rounded shadow-md hover:bg-rose-700 tracking-wide uppercase transition-colors" data-i18n="about.btn_more">
+                        Explore More
+                    </a>
+                </div>
+            </div>
+
+            <!-- TRUST PANEL -->
+            <div class="mt-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Side: Text and Trust details -->
+                <div class="order-2 lg:order-1">
+                    <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2" data-i18n="about.feat_subtitle">Our Features</p>
+                    <h3 class="text-secondary font-heading font-extrabold text-3xl mb-6" data-i18n="about.feat_title">We Are Trusted Cargo Company Since 1990</h3>
+                    
+                    <div class="flex items-start space-x-4 mb-6">
+                        <div class="text-primary text-xl mt-1 col-span-1 shrink-0">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-heading font-bold text-secondary mb-1" data-i18n="about.feat1_title">Worldwide Service</h4>
+                            <p class="text-slate-500 text-sm leading-relaxed" data-i18n="about.feat1_desc">Seamlessly connect continent-spanning supply chains with automated customs documentation filing, localized clearance protocols, and premium air-to-ocean transit handovers.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div class="text-primary text-xl mt-1 col-span-1 shrink-0">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-heading font-bold text-secondary mb-1" data-i18n="about.feat2_title">Secure & Safe Packaging</h4>
+                            <p class="text-slate-500 text-sm leading-relaxed" data-i18n="about.feat2_desc">Industrial-grade shockproof packaging, customized logistics containers, and temperature-controlled telemetry guards prevent transit anomalies for delicate inventory.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Workers photo grid -->
+                <div class="order-1 lg:order-2">
+                    <div class="relative overflow-hidden rounded-lg shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1740914994657-f1cdffdc418e?auto=format&fit=crop&w=800&q=80" alt="Trusted Shipment Workers" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/800x600?text=Trusted+Warehouse'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS / FACTS SECTION -->
+    <section class="py-20 lg:py-24 bg-lightBg border-t border-slate-100 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left text side -->
+                <div>
+                    <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2" data-i18n="stats.subtitle">Some Facts</p>
+                    <h2 class="text-secondary font-heading font-extrabold text-3xl sm:text-4xl mb-6" data-i18n="stats.title">#1 Place To Manage All Of Your Cargos</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed font-normal" data-i18n="stats.desc">
+                        We operate at the leading edge of modern transit engineering. From managing single-crate express courier dispatches to operating dedicated ocean-freight container networks, our centralized dashboard guarantees complete end-to-end transparency.
+                    </p>
+                    
+                    <div class="bg-primary/5 border border-primary/10 rounded-lg p-6 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 max-w-md">
+                        <div class="bg-primary text-white p-4 rounded-full text-xl shadow-md">
+                            <i class="fa-solid fa-phone-alt"></i>
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <p class="text-xs text-slate-500 font-bold uppercase tracking-wider" data-i18n="nav.call_query">Call for any query</p>
+                            <a href="tel:+1 702 426 9645" class="font-heading font-bold text-lg text-secondary hover:text-primary transition-colors">+1 702 426 9645</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right asymmetric stat grid matching reference layout precisely -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- Stat 1: Happy Clients -->
+                    <div class="bg-primary text-white rounded-lg p-8 shadow-lg flex flex-col justify-between items-start relative overflow-hidden group">
+                        <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="10447">10,447+</span>
+                        <span class="text-sm font-semibold text-rose-100 uppercase tracking-wider" data-i18n="stats.happy">Happy Clients</span>
+                    </div>
+
+                    <!-- Stat 2: Customer Reviews -->
+                    <div class="bg-emerald-600 text-white rounded-lg p-8 shadow-lg flex flex-col justify-between items-start relative overflow-hidden group sm:translate-y-6">
+                        <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="3234">3,234</span>
+                        <span class="text-sm font-semibold text-emerald-100 uppercase tracking-wider" data-i18n="stats.reviews">Customer Reviews</span>
+                    </div>
+
+                    <!-- Stat 3: Complete Shipments -->
+                    <div class="bg-sky-500 text-white rounded-lg p-8 shadow-lg flex flex-col justify-between items-start relative overflow-hidden group">
+                        <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-ship"></i>
+                        </div>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="20266">20,266</span>
+                        <span class="text-sm font-semibold text-sky-100 uppercase tracking-wider" data-i18n="stats.shipments">Complete Shipments</span>
+                    </div>
+
+                    <!-- Stat 4: Expert Workers -->
+                    <div class="bg-slate-800 text-white rounded-lg p-8 shadow-lg flex flex-col justify-between items-start relative overflow-hidden group sm:translate-y-6">
+                        <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="790">790</span>
+                        <span class="text-sm font-semibold text-slate-300 uppercase tracking-wider" data-i18n="stats.workers">Expert Workers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REQUEST FREE QUOTE SECTION -->
+    <section id="quote" class="py-20 lg:py-28 bg-white no-print">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Centered Quote Form Panel -->
+            <div class="bg-slate-50 p-8 sm:p-10 rounded-xl shadow-lg border border-slate-100">
+                <div class="text-center mb-8">
+                    <span class="text-primary font-heading font-bold text-sm uppercase tracking-widest block mb-2" data-i18n="quote.subtitle">Get A Quote</span>
+                    <h2 class="text-secondary font-heading font-extrabold text-2xl sm:text-3xl" data-i18n="quote.title">Request A Free Quote!</h2>
+                    <div class="w-12 h-1 bg-primary mx-auto mt-3 rounded"></div>
+                </div>
+                
+                <form id="quoteForm" onsubmit="handleQuoteSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="quoteName" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2" data-i18n="quote.lbl_name">Your Name</label>
+                            <input type="text" id="quoteName" required data-i18n-placeholder="quote.ph_name" placeholder="John Doe" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label for="quoteEmail" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2" data-i18n="quote.lbl_email">Your Email</label>
+                            <input type="email" id="quoteEmail" required placeholder="john@example.com" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="quotePhone" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2" data-i18n="quote.lbl_phone">Your Phone</label>
+                            <input type="tel" id="quotePhone" placeholder="+1 702 426 9645" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label for="quoteService" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2" data-i18n="quote.lbl_service">Select A Service</label>
+                            <select id="quoteService" class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+                                <option value="Air Freight" data-i18n="services.air_title">Air Freight</option>
+                                <option value="Ocean Freight" data-i18n="services.ocean_title">Ocean Freight</option>
+                                <option value="Road Freight" data-i18n="services.road_title">Road Freight</option>
+                                <option value="Train Freight" data-i18n="services.train_title">Train Freight</option>
+                                <option value="Warehouse Solutions" data-i18n="services.warehouse_title">Warehouse Solutions</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="quoteMessage" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2" data-i18n="quote.lbl_note">Special Note</label>
+                        <textarea id="quoteMessage" rows="4" data-i18n-placeholder="quote.ph_note" placeholder="Describe your logistics needs..." class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-primary text-white font-heading font-bold rounded uppercase tracking-wider hover:bg-rose-700 shadow-md transition-all" data-i18n="quote.btn_submit">
+                        Submit Request
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TESTIMONIAL CAROUSEL SECTION -->
+    <section id="testimonials" class="py-20 lg:py-28 bg-lightBg border-t border-slate-100 overflow-hidden no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header Text -->
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2" data-i18n="testimonial.subtitle">Testimonial</p>
+                <h2 class="text-secondary font-heading font-extrabold text-3xl sm:text-4xl" data-i18n="testimonial.title">Our Clients Say!</h2>
+                <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded"></div>
+            </div>
+
+            <!-- Interactive testimonial cards slider space -->
+            <div class="relative max-w-4xl mx-auto">
+                <div id="testimonialContainer" class="flex transition-transform duration-500 ease-in-out">
+                    <!-- Testimonial 1 -->
+                    <div class="w-full flex-shrink-0 px-4">
+                        <div class="bg-white rounded-xl p-8 sm:p-10 shadow-lg relative border border-slate-100">
+                            <!-- Quotation marks icon -->
+                            <div class="absolute top-6 right-8 text-slate-100 text-6xl pointer-events-none font-serif">“</div>
+                            
+                            <p class="text-slate-600 text-base italic leading-relaxed mb-6 font-normal" data-i18n="testimonial.client1_desc">
+                                "Cargotracker has completely transformed our global distribution model. Their real-time telemetry tracking and automated customs brokerage saved us over 40 hours of administrative overhead in our first month. The transit timelines are incredibly precise."
+                            </p>
+                            <div class="flex items-center space-x-4">
+                                <img src="https://images.unsplash.com/photo-1656338997878-279d71d48f6e?auto=format&fit=crop&w=150&q=80" alt="Client 1" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+1'">
+                                <div>
+                                    <h4 class="text-base font-heading font-bold text-secondary">Daniel Carter</h4>
+                                    <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold" data-i18n="testimonial.client1_role">Logistics Manager, TechCorp</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="w-full flex-shrink-0 px-4">
+                        <div class="bg-white rounded-xl p-8 sm:p-10 shadow-lg relative border border-slate-100">
+                            <div class="absolute top-6 right-8 text-slate-100 text-6xl pointer-events-none font-serif">“</div>
+                            
+                            <p class="text-slate-600 text-base italic leading-relaxed mb-6 font-normal" data-i18n="testimonial.client2_desc">
+                                "Operating a complex, nationwide retail supply chain requires flawless timing. Cargotracker delivers consistent reliability across our road and rail operations. Their instant rate estimator makes logistics planning painless."
+                            </p>
+                            <div class="flex items-center space-x-4">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Client 2" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+2'">
+                                <div>
+                                    <h4 class="text-base font-heading font-bold text-secondary">Sophia Bennett</h4>
+                                    <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold" data-i18n="testimonial.client2_role">Supply Chain Dir, PrimeGoods</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="w-full flex-shrink-0 px-4">
+                        <div class="bg-white rounded-xl p-8 sm:p-10 shadow-lg relative border border-slate-100">
+                            <div class="absolute top-6 right-8 text-slate-100 text-6xl pointer-events-none font-serif">“</div>
+                            
+                            <p class="text-slate-600 text-base italic leading-relaxed mb-6 font-normal" data-i18n="testimonial.client3_desc">
+                                "During a critical sea-freight customs hold, Cargotracker's dedicated support agents intervened immediately to update declaration files. Their proactive service saved us thousands in potential port delays."
+                            </p>
+                            <div class="flex items-center space-x-4">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Client 3" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+3'">
+                                <div>
+                                    <h4 class="text-base font-heading font-bold text-secondary">Ethan Vance</h4>
+                                    <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold" data-i18n="testimonial.client3_role">COO, GlobaRetail</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Indicators / Buttons -->
+                <div class="flex justify-center items-center space-x-3 mt-10">
+                    <button onclick="prevSlide()" class="w-10 h-10 rounded-full bg-white text-secondary shadow-md hover:bg-primary hover:text-white transition-colors border border-slate-100 flex items-center justify-center">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <!-- Dot indicators -->
+                    <div class="flex space-x-2">
+                        <button onclick="goToSlide(0)" class="slide-dot w-3 h-3 rounded-full bg-primary transition-colors duration-300"></button>
+                        <button onclick="goToSlide(1)" class="slide-dot w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-colors duration-300"></button>
+                        <button onclick="goToSlide(2)" class="slide-dot w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-colors duration-300"></button>
+                    </div>
+                    <button onclick="nextSlide()" class="w-10 h-10 rounded-full bg-white text-secondary shadow-md hover:bg-primary hover:text-white transition-colors border border-slate-100 flex items-center justify-center">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & GET IN TOUCH -->
+    <section id="contact" class="py-20 lg:py-28 bg-white no-print">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2" data-i18n="contact.subtitle">Get In Touch</p>
+            <h2 class="text-secondary font-heading font-extrabold text-3xl sm:text-4xl mb-6" data-i18n="contact.title">Contact Us For Any Inquiry</h2>
+            <p class="text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed" data-i18n="contact.desc">
+                Our experts are available 24/7 to solve your logistics, transport, tracking and freight management inquiries. Reach out to us via any channel or submit the request form.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Address Card -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
+                    <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-map-marker-alt text-xl"></i></div>
+                    <h4 class="font-heading font-bold text-secondary text-base" data-i18n="contact.card1_title">Office Address</h4>
+                    <p class="text-slate-500 text-sm mt-2 font-medium" data-i18n="contact.card1_desc">Brooklyn, New York, USA</p>
+                </div>
+                <!-- Phone Card -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
+                    <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-phone-alt text-xl"></i></div>
+                    <h4 class="font-heading font-bold text-secondary text-base" data-i18n="contact.card2_title">Emergency Phone</h4>
+                    <p class="text-slate-500 text-sm mt-2 font-medium">+1 702 426 9645</p>
+                </div>
+                <!-- Email Card -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center text-center">
+                    <div class="bg-primary/10 text-primary p-4 rounded-full mb-4"><i class="fa-solid fa-envelope text-xl"></i></div>
+                    <h4 class="font-heading font-bold text-secondary text-base" data-i18n="contact.card3_title">Email Support</h4>
+                    <p class="text-slate-500 text-sm mt-2 font-medium">info@cargotracker.org</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="bg-slate-900 text-slate-300 pt-20 pb-10 border-t border-slate-800 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Address / Brand Column -->
+                <div>
+                    <h3 class="font-heading font-extrabold text-2xl text-white mb-6">
+                        <i class="fa-solid fa-box-open mr-2 text-primary"></i>CargoTracker
+                    </h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="footer.desc">
+                        Providing premier, certified transport, global cargo shipping, and warehouse fulfillment across 180 countries since 1990.
+                    </p>
+                    <div class="space-y-3 text-sm">
+                        <p class="flex items-center" data-i18n="topbar.location"><i class="fa-solid fa-map-marker-alt text-primary mr-3 text-base"></i> Brooklyn, New York, USA</p>
+                        <p class="flex items-center"><i class="fa-solid fa-phone-alt text-primary mr-3 text-base"></i> +1 702 426 9645</p>
+                        <p class="flex items-center"><i class="fa-solid fa-envelope text-primary mr-3 text-base"></i> info@cargotracker.org</p>
+                    </div>
+                </div>
+
+                <!-- Services Column -->
+                <div>
+                    <h4 class="font-heading font-bold text-lg text-white mb-6 border-l-4 border-primary pl-3" data-i18n="footer.title_services">Services</h4>
+                    <ul class="space-y-3 text-sm font-semibold uppercase tracking-wide">
+                        <li><a href="#services" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> <span data-i18n="services.air_title">Air Freight</span></a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> <span data-i18n="services.ocean_title">Ocean Freight</span></a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> <span data-i18n="services.road_title">Road Freight</span></a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> <span data-i18n="services.train_title">Train Freight</span></a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> <span data-i18n="services.warehouse_title">Warehouse Solutions</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div>
+                    <h4 class="font-heading font-bold text-lg text-white mb-6 border-l-4 border-primary pl-3" data-i18n="footer.title_links">Quick Links</h4>
+                    <ul class="space-y-3 text-sm font-semibold uppercase tracking-wide">
+                        <li><a href="#about" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> <span data-i18n="nav.about">About Us</span></a></li>
+                        <li><a href="#contact" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> <span data-i18n="nav.contact">Contact Us</span></a></li>
+                        <li><a href="#testimonials" class="hover:text-primary transition-colors flex items-center"><i class="fa-solid fa-angle-right text-xs mr-2 text-primary"></i> <span data-i18n="nav.testimonial">Reviews</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter Column -->
+                <div>
+                    <h4 class="font-heading font-bold text-lg text-white mb-6 border-l-4 border-primary pl-3" data-i18n="footer.title_newsletter">Newsletter</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="footer.newsletter_desc">
+                        Stay updated on global shipping trends, customs policy changes, and logistics solutions.
+                    </p>
+                    <form onsubmit="handleNewsletterSubmit(event)" class="space-y-3">
+                        <div class="relative">
+                            <input type="email" id="newsEmail" required data-i18n-placeholder="footer.ph_email" placeholder="Your Email" class="w-full bg-slate-800 text-white rounded px-4 py-3 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent transition-all">
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-primary hover:bg-rose-700 text-white font-heading font-bold uppercase tracking-wider text-sm rounded shadow transition-colors" data-i18n="footer.btn_signup">
+                            SignUp
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Border Line -->
+            <div class="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
+                <p>&copy; <span id="currentYear"></span> CargoTracker. <span data-i18n="footer.copyright">All Rights Reserved.</span></p>
+                <p class="mt-2 sm:mt-0">Designed by <a href="#" class="text-slate-400 hover:text-primary transition-colors">HTML Codex</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE NOTIFICATION / RESPONSE MODAL -->
+    <div id="statusModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden no-print">
+        <div class="bg-white rounded-lg p-6 sm:p-8 max-w-md w-full shadow-2xl text-center transform scale-95 opacity-0 transition-all duration-300" id="modalCard">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl mx-auto mb-4" id="modalIcon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="font-heading font-extrabold text-xl text-secondary mb-2" id="modalTitle">Request Submitted!</h3>
+            <p class="text-slate-500 text-sm mb-6 leading-relaxed" id="modalMessage">
+                Thank you. We have received your parameters and will respond within 15 minutes with your custom quote.
+            </p>
+            <button onclick="closeStatusModal()" class="w-full py-3 bg-secondary hover:bg-slate-800 text-white font-heading font-bold rounded uppercase tracking-wider transition-all" data-i18n="modal.btn_close">
+                Close Window
+            </button>
+        </div>
+    </div>
+
+    <!-- ENTERPRISE PROOF OF DELIVERY / MANIFEST MODAL -->
+    <div id="manifestModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm hidden">
+        <div class="bg-white text-slate-900 rounded-2xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6 no-print">
+                <h3 class="font-heading font-extrabold text-lg text-secondary">
+                    <i class="fa-solid fa-file-invoice text-primary mr-2"></i> <span data-i18n="manifest.modal_title">Cargo Manifest Bill of Lading</span>
+                </h3>
+                <button onclick="closeManifestModal()" class="text-slate-400 hover:text-slate-900 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Printed content sheet -->
+            <div id="manifestPrintArea" class="bg-slate-50 p-6 sm:p-8 rounded-xl border border-slate-200 font-sans text-xs text-slate-800 leading-relaxed">
+                <!-- Inner Invoice Header -->
+                <div class="flex justify-between items-start border-b border-slate-300 pb-4 mb-6">
+                    <div>
+                        <h2 class="text-xl font-heading font-extrabold text-slate-950 uppercase tracking-wider">CargoTracker Logistics</h2>
+                        <p class="text-[10px] text-slate-500 font-semibold uppercase mt-1" data-i18n="manifest.bill_title">Waybill Declaration & Safety Bill</p>
+                        <p class="text-[10px] text-slate-400 mt-1" data-i18n="contact.card1_desc">Brooklyn, NY, USA</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="bg-primary/10 text-primary px-3 py-1.5 rounded font-extrabold uppercase text-[9px] tracking-wider" id="manifestStatusTag">IN TRANSIT</span>
+                        <p class="text-[10px] text-slate-500 mt-3 font-mono"><span data-i18n="manifest.date_generated">Date Generated</span>: <span id="manifestDate">May 26, 2026</span></p>
+                    </div>
+                </div>
+
+                <!-- Logistics Grid -->
+                <div class="grid grid-cols-2 gap-6 mb-6 text-[11px]">
+                    <div>
+                        <h4 class="font-extrabold text-slate-950 uppercase text-[9px] tracking-wider text-slate-400 mb-1" data-i18n="manifest.lbl_origin">Shipper Origin</h4>
+                        <p id="manShipper" class="font-semibold text-slate-800">-</p>
+                        <p class="text-slate-400 mt-0.5" data-i18n="manifest.lbl_origin_sub">Approved Logistics Facility Node</p>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-slate-950 uppercase text-[9px] tracking-wider text-slate-400 mb-1" data-i18n="manifest.lbl_dest">Consignee Destination</h4>
+                        <p id="manReceiver" class="font-semibold text-slate-800">-</p>
+                        <p class="text-slate-400 mt-0.5" data-i18n="manifest.lbl_dest_sub">Secure Final Delivery Destination</p>
+                    </div>
+                </div>
+
+                <!-- Specs table -->
+                <table class="w-full border-collapse border border-slate-300 text-left mb-6 font-semibold">
+                    <thead>
+                        <tr class="bg-slate-200 text-slate-700 uppercase text-[9px] tracking-wider">
+                            <th class="border border-slate-300 p-2" data-i18n="manifest.col_id">Tracking ID</th>
+                            <th class="border border-slate-300 p-2" data-i18n="manifest.col_class">Cargo Service Class</th>
+                            <th class="border border-slate-300 p-2" data-i18n="manifest.col_weight">Net Weight</th>
+                            <th class="border border-slate-300 p-2" data-i18n="manifest.col_dimensions">Dimensions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="font-mono text-slate-900 bg-white">
+                            <td id="manID" class="border border-slate-300 p-2 font-bold text-primary">-</td>
+                            <td id="manService" class="border border-slate-300 p-2 font-sans">-</td>
+                            <td id="manWeight" class="border border-slate-300 p-2">-</td>
+                            <td id="manDimensions" class="border border-slate-300 p-2">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="border-t border-slate-300 pt-4 flex justify-between items-center">
+                    <div>
+                        <p class="text-[9px] text-slate-400 font-mono tracking-wider uppercase font-bold mb-1" data-i18n="manifest.lbl_barcode">Digital Manifest Key</p>
+                        <div id="manBarcode" class="font-mono text-lg tracking-[0.1em] text-slate-900 font-light select-none">|||| || ||| | |||</div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[10px] font-bold text-slate-800">CargoTracker Intelligence Systems Inc.</p>
+                        <p class="text-[9px] text-slate-400 mt-0.5" data-i18n="manifest.electronic_signature">Signature Verified Electronically</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal CTA triggers -->
+            <div class="mt-6 flex gap-3 justify-end no-print">
+                <button onclick="closeManifestModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider rounded transition-colors" data-i18n="manifest.btn_close">
+                    Close Sheet
+                </button>
+                <button onclick="printManifest()" class="px-5 py-2.5 bg-primary hover:bg-rose-700 text-white text-xs font-bold uppercase tracking-wider rounded transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> <span data-i18n="manifest.btn_print">Print Document</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Global i18n Translation Dictionary
+        const translations = {
+            en: {
+                "topbar.location": '<i class="fa-solid fa-map-marker-alt text-primary mr-2"></i> Brooklyn, New York, USA',
+                "nav.home": "Home",
+                "nav.track": "Track",
+                "nav.about": "About",
+                "nav.services": "Services",
+                "nav.quote": "Quote",
+                "nav.testimonial": "Testimonial",
+                "nav.contact": "Contact",
+                "nav.call_query": "Call for any query",
+                "nav.select_lang": "Select Language",
+                "hero.subtitle": "Transport & Logistics Solution",
+                "hero.title": '#1 Place For Your <span class="text-primary">Cargo</span> Solutions',
+                "hero.desc": "Ensure bulletproof tracking and ultra-precise freight transport with our signature cargo intelligence system. We deliver confidence across sea, land, and sky.",
+                "hero.btn_track": "Track Package",
+                "hero.btn_quote": "Free Quote",
+                "tracker.telemetry": '<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span> Live Global Telemetry',
+                "tracker.title": "Enterprise Cargo Tracking",
+                "tracker.desc": "Search cargo databases for instant active route logs. Enter your unique tracking ID created on the server Operations portal.",
+                "tracker.placeholder": "e.g. SH-12345",
+                "tracker.btn_locate": "Locate Freight",
+                "tracker.col_waybill": "Active Waybill",
+                "tracker.col_service": "Service Level",
+                "tracker.col_checkpoint": "Latest Checkpoint",
+                "tracker.col_delivery": "Delivery Target",
+                "tracker.pipeline": "Transit Pipeline",
+                "tracker.step1": "Manifest Sent",
+                "tracker.step2": "Freight Handover",
+                "tracker.step3": "In Transit",
+                "tracker.step4": "Out / Delivered",
+                "tracker.inv_title": "Cargo Inventory & Telemetry",
+                "tracker.lbl_origin": "Shipper / Origin",
+                "tracker.lbl_dest": "Consignee / Destination",
+                "tracker.lbl_weight": "Gross Payload Weight",
+                "tracker.lbl_dimensions": "Dimensions (L×W×H)",
+                "tracker.lbl_sensor": "Container Telemetry",
+                "tracker.barcode_lbl": "Security Verification Barcode",
+                "tracker.btn_manifest": "Manifest Invoice",
+                "tracker.btn_support": "Support Desk",
+                "tracker.ledger_title": "Route Log Ledger",
+                "services.subtitle": "Our Services",
+                "services.title": "Explore Our Services",
+                "services.air_title": "Air Freight",
+                "services.air_desc": "Priority air transportation solutions utilizing scheduled flights and chartered cargo aircraft to guarantee rapid, time-critical delivery to global destinations.",
+                "services.ocean_title": "Ocean Freight",
+                "services.ocean_desc": "Cost-efficient ocean transportation for full container loads (FCL) and less-than-container loads (LCL), managed through strategic agreements with major global ocean carriers.",
+                "services.road_title": "Road Freight",
+                "services.road_desc": "Flexible long-haul trucking and door-to-door distribution services across extensive domestic networks, using GPS-tracked, modern, and temperature-controlled fleets.",
+                "services.train_title": "Train Freight",
+                "services.train_desc": "Sustainable, high-capacity overland rail transit linking major industrial zones, providing an ideal balance between transit speed and shipping budget constraints.",
+                "services.customs_title": "Customs Clearance",
+                "services.customs_desc": "Streamlined brokerage and compliance services managed by certified agents to fast-track import and export customs processing at air hubs, land borders, and ocean ports.",
+                "services.warehouse_title": "Warehouse Solutions",
+                "services.warehouse_desc": "State-of-the-art secure storage with digital manifest control, advanced stock tracking, thermal containment options, and express dispatch docks.",
+                "about.subtitle": "About Us",
+                "about.title": "Quick Transport and Cargo Solutions",
+                "about.desc": "At CargoTracker, we redefine international logistics through technology-driven transport networks, strict quality standards, and deep domain expertise. We build resilient supply chains that allow companies of all sizes to import, export, and scale globally with complete peace of mind.",
+                "about.card1_title": "Global Coverage",
+                "about.card1_desc": "Access over 180 countries through a deeply integrated multimodal partner network.",
+                "about.card2_title": "On Time Delivery",
+                "about.card2_desc": "Achieving a consistent 99.4% on-time arrival rate through modern route optimization engines.",
+                "about.btn_more": "Explore More",
+                "about.feat_subtitle": "Our Features",
+                "about.feat_title": "We Are Trusted Cargo Company Since 1990",
+                "about.feat1_title": "Worldwide Service",
+                "about.feat1_desc": "Seamlessly connect continent-spanning supply chains with automated customs documentation filing, localized clearance protocols, and premium air-to-ocean transit handovers.",
+                "about.feat2_title": "Secure & Safe Packaging",
+                "about.feat2_desc": "Industrial-grade shockproof packaging, customized logistics containers, and temperature-controlled telemetry guards prevent transit anomalies for delicate inventory.",
+                "stats.subtitle": "Some Facts",
+                "stats.title": "#1 Place To Manage All Of Your Cargos",
+                "stats.desc": "We operate at the leading edge of modern transit engineering. From managing single-crate express courier dispatches to operating dedicated ocean-freight container networks, our centralized dashboard guarantees complete end-to-end transparency.",
+                "stats.happy": "Happy Clients",
+                "stats.reviews": "Customer Reviews",
+                "stats.shipments": "Complete Shipments",
+                "stats.workers": "Expert Workers",
+                "quote.subtitle": "Get A Quote",
+                "quote.title": "Request A Free Quote!",
+                "quote.lbl_name": "Your Name",
+                "quote.ph_name": "John Doe",
+                "quote.lbl_email": "Your Email",
+                "quote.lbl_phone": "Your Phone",
+                "quote.lbl_service": "Select A Service",
+                "quote.lbl_note": "Special Note",
+                "quote.ph_note": "Describe your logistics needs...",
+                "quote.btn_submit": "Submit Request",
+                "testimonial.subtitle": "Testimonial",
+                "testimonial.title": "Our Clients Say!",
+                "testimonial.client1_desc": ' "Cargotracker has completely transformed our global distribution model. Their real-time telemetry tracking and automated customs brokerage saved us over 40 hours of administrative overhead in our first month. The transit timelines are incredibly precise." ',
+                "testimonial.client1_role": "Logistics Manager, TechCorp",
+                "testimonial.client2_desc": ' "Operating a complex, nationwide retail supply chain requires flawless timing. Cargotracker delivers consistent reliability across our road and rail operations. Their instant rate estimator makes logistics planning painless." ',
+                "testimonial.client2_role": "Supply Chain Dir, PrimeGoods",
+                "testimonial.client3_desc": ' "During a critical sea-freight customs hold, Cargotracker\'s dedicated support agents intervened immediately to update declaration files. Their proactive service saved us thousands in potential port delays." ',
+                "testimonial.client3_role": "COO, GlobaRetail",
+                "contact.subtitle": "Get In Touch",
+                "contact.title": "Contact Us For Any Inquiry",
+                "contact.desc": "Our experts are available 24/7 to solve your logistics, transport, tracking and freight management inquiries. Reach out to us via any channel or submit the request form.",
+                "contact.card1_title": "Office Address",
+                "contact.card1_desc": "Brooklyn, New York, USA",
+                "contact.card2_title": "Emergency Phone",
+                "contact.card3_title": "Email Support",
+                "footer.desc": "Providing premier, certified transport, global cargo shipping, and warehouse fulfillment across 180 countries since 1990.",
+                "footer.title_services": "Services",
+                "footer.title_links": "Quick Links",
+                "footer.title_newsletter": "Newsletter",
+                "footer.newsletter_desc": "Stay updated on global shipping trends, customs policy changes, and logistics solutions.",
+                "footer.ph_email": "Your Email",
+                "footer.btn_signup": "SignUp",
+                "footer.copyright": "All Rights Reserved.",
+                "modal.btn_close": "Close Window",
+                "manifest.modal_title": "Cargo Manifest Bill of Lading",
+                "manifest.bill_title": "Waybill Declaration & Safety Bill",
+                "manifest.date_generated": "Date Generated",
+                "manifest.lbl_origin": "Shipper Origin",
+                "manifest.lbl_origin_sub": "Approved Logistics Facility Node",
+                "manifest.lbl_dest": "Consignee Destination",
+                "manifest.lbl_dest_sub": "Secure Final Delivery Destination",
+                "manifest.col_id": "Tracking ID",
+                "manifest.col_class": "Cargo Service Class",
+                "manifest.col_weight": "Net Weight",
+                "manifest.col_dimensions": "Dimensions",
+                "manifest.lbl_barcode": "Digital Manifest Key",
+                "manifest.electronic_signature": "Signature Verified Electronically",
+                "manifest.btn_close": "Close Sheet",
+                "manifest.btn_print": "Print Document"
+            },
+            es: {
+                "topbar.location": '<i class="fa-solid fa-map-marker-alt text-primary mr-2"></i> Brooklyn, Nueva York, EE. UU.',
+                "nav.home": "Inicio",
+                "nav.track": "Rastrear",
+                "nav.about": "Nosotros",
+                "nav.services": "Servicios",
+                "nav.quote": "Cotizar",
+                "nav.testimonial": "Testimonio",
+                "nav.contact": "Contacto",
+                "nav.call_query": "Llámenos para consultas",
+                "nav.select_lang": "Seleccione Idioma",
+                "hero.subtitle": "Solución de Transporte y Logística",
+                "hero.title": '#1 Lugar para sus Soluciones de <span class="text-primary">Carga</span>',
+                "hero.desc": "Garantice un seguimiento infalible y un transporte de carga ultra preciso con nuestro sistema exclusivo de inteligencia de carga. Brindamos confianza por mar, tierra y aire.",
+                "hero.btn_track": "Rastrear Paquete",
+                "hero.btn_quote": "Cotización Gratis",
+                "tracker.telemetry": '<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span> Telemetría Global en Vivo',
+                "tracker.title": "Seguimiento de Carga Empresarial",
+                "tracker.desc": "Busque en las bases de datos de carga para obtener registros de rutas activos al instante. Ingrese su ID de seguimiento exclusivo creado en el portal de Operaciones.",
+                "tracker.placeholder": "ej. SH-12345",
+                "tracker.btn_locate": "Localizar Carga",
+                "tracker.col_waybill": "Carta de Porte Activa",
+                "tracker.col_service": "Nivel de Servicio",
+                "tracker.col_checkpoint": "Último Punto de Control",
+                "tracker.col_delivery": "Fecha Objetivo",
+                "tracker.pipeline": "Línea de Tránsito",
+                "tracker.step1": "Manifiesto Enviado",
+                "tracker.step2": "Entrega de Carga",
+                "tracker.step3": "En Tránsito",
+                "tracker.step4": "Entregado",
+                "tracker.inv_title": "Inventario de Carga y Telemetría",
+                "tracker.lbl_origin": "Remitente / Origen",
+                "tracker.lbl_dest": "Consignatario / Destino",
+                "tracker.lbl_weight": "Peso Bruto de Carga",
+                "tracker.lbl_dimensions": "Dimensiones (L×An×Al)",
+                "tracker.lbl_sensor": "Telemetría del Contenedor",
+                "tracker.barcode_lbl": "Código de Barras de Verificación",
+                "tracker.btn_manifest": "Factura de Manifiesto",
+                "tracker.btn_support": "Soporte Técnico",
+                "tracker.ledger_title": "Libro de Registro de Ruta",
+                "services.subtitle": "Nuestros Servicios",
+                "services.title": "Explore Nuestros Servicios",
+                "services.air_title": "Transporte Aéreo",
+                "services.air_desc": "Soluciones de transporte aéreo prioritario utilizando vuelos regulares y aviones de carga fletados para garantizar una entrega rápida y urgente a destinos globales.",
+                "services.ocean_title": "Transporte Marítimo",
+                "services.ocean_desc": "Transporte marítimo rentable para cargas de contenedor completo (FCL) y cargas consolidadas (LCL), gestionado mediante acuerdos estratégicos con las principales navieras globales.",
+                "services.road_title": "Transporte Terrestre",
+                "services.road_desc": "Servicios flexibles de transporte de larga distancia y distribución puerta a puerta a través de extensas redes nacionales, utilizando flotas modernas con seguimiento GPS.",
+                "services.train_title": "Transporte Ferroviario",
+                "services.train_desc": "Tránsito ferroviario terrestre sostenible y de alta capacidad que une las principales zonas industriales, proporcionando un equilibrio ideal entre velocidad y presupuesto.",
+                "services.customs_title": "Despacho de Aduanas",
+                "services.customs_desc": "Servicios simplificados de corretaje y cumplimiento gestionados por agentes certificados para acelerar el procesamiento de aduanas en aeropuertos, fronteras y puertos.",
+                "services.warehouse_title": "Soluciones de Almacén",
+                "services.warehouse_desc": "Almacenamiento seguro de última generación con control de manifiesto digital, seguimiento avanzado de stock, opciones de contención térmica y muelles de despacho rápido.",
+                "about.subtitle": "Sobre Nosotros",
+                "about.title": "Soluciones Rápidas de Transporte y Carga",
+                "about.desc": "En CargoTracker, redefinimos la logística internacional mediante redes de transporte impulsadas por tecnología, estrictos estándares de calidad y una profunda experiencia en el sector. Construimos cadenas de suministro resilientes que permiten a empresas de todos los tamaños importar, exportar y escalar a nivel mundial con total tranquilidad.",
+                "about.card1_title": "Cobertura Global",
+                "about.card1_desc": "Acceda a más de 180 países a través de una red de socios multimodales profundamente integrada.",
+                "about.card2_title": "Entrega a Tiempo",
+                "about.card2_desc": "Logrando una tasa constante de llegada a tiempo del 99.4% gracias a motores de optimización de rutas modernos.",
+                "about.btn_more": "Explorar Más",
+                "about.feat_subtitle": "Nuestras Características",
+                "about.feat_title": "Somos una empresa de carga de confianza desde 1990",
+                "about.feat1_title": "Servicio Mundial",
+                "about.feat1_desc": "Conecte sin problemas cadenas de suministro transcontinentales con presentación automatizada de documentos aduaneros, protocolos de despacho localizados y transferencias premium de tránsito aéreo a marítimo.",
+                "about.feat2_title": "Embalaje Seguro y Protegido",
+                "about.feat2_desc": "Embalaje a prueba de golpes de grado industrial, contenedores logísticos personalizados y guardias telemétricos con control de temperatura que previenen anomalías en el tránsito de inventario delicado.",
+                "stats.subtitle": "Algunos Datos",
+                "stats.title": "#1 Lugar para gestionar todas sus cargas",
+                "stats.desc": "Operamos a la vanguardia de la ingeniería de tránsito moderna. Desde la gestión de envíos de mensajería exprés en cajas individuales hasta la operación de redes de contenedores de carga marítima dedicadas, nuestro panel centralizado garantiza una transparencia total de extremo a extremo.",
+                "stats.happy": "Clientes Felices",
+                "stats.reviews": "Reseñas de Clientes",
+                "stats.shipments": "Envíos Completados",
+                "stats.workers": "Trabajadores Expertos",
+                "quote.subtitle": "Obtener Cotización",
+                "quote.title": "¡Solicite una Cotización Gratis!",
+                "quote.lbl_name": "Su Nombre",
+                "quote.ph_name": "Juan Pérez",
+                "quote.lbl_email": "Su Correo",
+                "quote.lbl_phone": "Su Teléfono",
+                "quote.lbl_service": "Seleccione un Servicio",
+                "quote.lbl_note": "Nota Especial",
+                "quote.ph_note": "Describa sus necesidades logísticas...",
+                "quote.btn_submit": "Enviar Solicitud",
+                "testimonial.subtitle": "Testimonio",
+                "testimonial.title": "¡Lo Que Dicen Nuestros Clientes!",
+                "testimonial.client1_desc": ' "CargoTracker ha transformado por completo nuestro modelo de distribución global. Su seguimiento telemétrico en tiempo real y el despacho de aduanas automatizado nos ahorraron más de 40 horas de gastos administrativos en nuestro primer mes. Los plazos de tránsito son increíblemente precisos." ',
+                "testimonial.client1_role": "Gerente de Logística, TechCorp",
+                "testimonial.client2_desc": ' "Operar una cadena de suministro minorista compleja a nivel nacional requiere una sincronización impecable. CargoTracker ofrece una confiabilidad constante en nuestras operaciones por carretera y ferrocarril. Su estimador de tarifas instantáneo facilita la planificación." ',
+                "testimonial.client2_role": "Directora de Cadena de Suministro, PrimeGoods",
+                "testimonial.client3_desc": ' "Durante una retención aduanera crítica en transporte marítimo, los agentes de soporte dedicados de CargoTracker intervinieron de inmediato para actualizar los archivos de declaración. Su servicio proactivo nos ahorró miles en posibles demoras portuarias." ',
+                "testimonial.client3_role": "Director de Operaciones, GlobaRetail",
+                "contact.subtitle": "Póngase en Contacto",
+                "contact.title": "Contáctenos para cualquier consulta",
+                "contact.desc": "Nuestros expertos están disponibles las 24 horas, los 7 días de la semana, para resolver sus consultas de logística, transporte, seguimiento y gestión de carga. Comuníquese a través de cualquier canal.",
+                "contact.card1_title": "Dirección de Oficina",
+                "contact.card1_desc": "Brooklyn, Nueva York, EE. UU.",
+                "contact.card2_title": "Teléfono de Emergencia",
+                "contact.card3_title": "Soporte por Correo",
+                "footer.desc": "Brindando transporte de primer nivel certificado, envíos de carga global y cumplimiento de almacén en más de 180 países desde 1990.",
+                "footer.title_services": "Servicios",
+                "footer.title_links": "Enlaces Rápidos",
+                "footer.title_newsletter": "Boletín Informativo",
+                "footer.newsletter_desc": "Manténgase actualizado sobre las tendencias de envío global, cambios en las políticas aduaneras y soluciones logísticas.",
+                "footer.ph_email": "Su Correo Electrónico",
+                "footer.btn_signup": "Registrarse",
+                "footer.copyright": "Todos los derechos reservados.",
+                "modal.btn_close": "Cerrar Ventana",
+                "manifest.modal_title": "Manifiesto de Carga y Conocimiento de Embarque",
+                "manifest.bill_title": "Declaración de Hoja de Ruta y Proyecto de Ley de Seguridad",
+                "manifest.date_generated": "Fecha de Generación",
+                "manifest.lbl_origin": "Origen del Remitente",
+                "manifest.lbl_origin_sub": "Nodo de Instalación Logística Aprobado",
+                "manifest.lbl_dest": "Destino de Consignatario",
+                "manifest.lbl_dest_sub": "Destino Final de Entrega Seguro",
+                "manifest.col_id": "ID de Seguimiento",
+                "manifest.col_class": "Clase de Servicio de Carga",
+                "manifest.col_weight": "Peso Neto",
+                "manifest.col_dimensions": "Dimensiones",
+                "manifest.lbl_barcode": "Clave Digital de Manifiesto",
+                "manifest.electronic_signature": "Firma Electrónica Verificada",
+                "manifest.btn_close": "Cerrar Manifiesto",
+                "manifest.btn_print": "Imprimir Documento"
+            },
+            fr: {
+                "topbar.location": '<i class="fa-solid fa-map-marker-alt text-primary mr-2"></i> Brooklyn, New York, USA',
+                "nav.home": "Accueil",
+                "nav.track": "Suivi",
+                "nav.about": "À Propos",
+                "nav.services": "Services",
+                "nav.quote": "Devis",
+                "nav.testimonial": "Témoignages",
+                "nav.contact": "Contact",
+                "nav.call_query": "Contactez-nous pour toute question",
+                "nav.select_lang": "Choisir la Langue",
+                "hero.subtitle": "Solutions de Transport & Logistique",
+                "hero.title": '#1 Place pour vos Solutions de <span class="text-primary">Fret</span>',
+                "hero.desc": "Bénéficiez d'un suivi infaillible et d'un transport de fret ultra-précis grâce à notre système d'intelligence logistique exclusif. Nous livrons en toute confiance par mer, terre et air.",
+                "hero.btn_track": "Suivre un Colis",
+                "hero.btn_quote": "Devis Gratuit",
+                "tracker.telemetry": '<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span> Télémétrie Globale en Direct',
+                "tracker.title": "Suivi du Fret d'Entreprise",
+                "tracker.desc": "Recherchez instantanément les itinéraires actifs dans nos bases de données. Saisissez l'identifiant de suivi unique généré sur le portail des opérations.",
+                "tracker.placeholder": "ex. SH-12345",
+                "tracker.btn_locate": "Localiser le Fret",
+                "tracker.col_waybill": "Lettre de Voiture Active",
+                "tracker.col_service": "Niveau de Service",
+                "tracker.col_checkpoint": "Dernier Point de Contrôle",
+                "tracker.col_delivery": "Date d'Arrivée Prévue",
+                "tracker.pipeline": "Pipeline de Transit",
+                "tracker.step1": "Manifeste Envoyé",
+                "tracker.step2": "Remise du Fret",
+                "tracker.step3": "En Transit",
+                "tracker.step4": "Livré",
+                "tracker.inv_title": "Inventaire du Fret & Télémétrie",
+                "tracker.lbl_origin": "Expéditeur / Origine",
+                "tracker.lbl_dest": "Destinataire / Destination",
+                "tracker.lbl_weight": "Poids Brut du Chargement",
+                "tracker.lbl_dimensions": "Dimensions (L×l×H)",
+                "tracker.lbl_sensor": "Télémétrie du Conteneur",
+                "tracker.barcode_lbl": "Code-barres de Vérification",
+                "tracker.btn_manifest": "Facture du Manifeste",
+                "tracker.btn_support": "Bureau d'Assistance",
+                "tracker.ledger_title": "Registre de Route",
+                "services.subtitle": "Nos Services",
+                "services.title": "Explorez Nos Services",
+                "services.air_title": "Fret Aérien",
+                "services.air_desc": "Solutions prioritaires de transport aérien via vols réguliers et avions-cargos affrétés pour garantir des livraisons rapides et urgentes à travers le monde.",
+                "services.ocean_title": "Fret Maritime",
+                "services.ocean_desc": "Transport maritime économique pour conteneurs complets (FCL) ou groupage (LCL), géré via des accords stratégiques avec les plus grands transporteurs mondiaux.",
+                "services.road_title": "Fret Routier",
+                "services.road_desc": "Services flexibles de transport longue distance et de distribution porte-à-porte via un vaste réseau national de flottes modernes suivies par GPS.",
+                "services.train_title": "Fret Ferroviaire",
+                "services.train_desc": "Transit ferroviaire terrestre durable et à grande capacité reliant les principales zones industrielles, offrant un compromis idéal entre vitesse et budget.",
+                "services.customs_title": "Dédouanement",
+                "services.customs_desc": "Services simplifiés de courtage et de conformité gérés par des agents agréés pour accélérer le traitement douanier dans les aéroports, frontières et ports.",
+                "services.warehouse_title": "Solutions d'Entreposage",
+                "services.warehouse_desc": "Stockage sécurisé de pointe avec contrôle numérique des manifestes, suivi avancé des stocks, régulation thermique et quais d'expédition express.",
+                "about.subtitle": "À Propos de Nous",
+                "about.title": "Solutions Rapides de Transport et de Fret",
+                "about.desc": "Chez CargoTracker, nous redéfinissons la logistique internationale grâce à des réseaux de transport technologiques, des normes de qualité strictes et une expertise approfondie du secteur. Nous bâtissons des chaînes d'approvisionnement résilientes permettant aux entreprises de toutes tailles d'importer, d'exporter et de se développer sereinement.",
+                "about.card1_title": "Couverture Globale",
+                "about.card1_desc": "Accédez à plus de 180 pays grâce à un réseau de partenaires multimodaux profondément intégré.",
+                "about.card2_title": "Livraison à Temps",
+                "about.card2_desc": "Taux de ponctualité constant de 99,4% grâce à nos outils modernes d'optimisation d'itinéraires.",
+                "about.btn_more": "En Savoir Plus",
+                "about.feat_subtitle": "Nos Atouts",
+                "about.feat_title": "Une Entreprise de Transport de Confiance Depuis 1990",
+                "about.feat1_title": "Service International",
+                "about.feat1_desc": "Connectez vos chaînes d'approvisionnement transcontinentales grâce au dépôt automatisé des documents douaniers, des protocoles de dédouanement locaux et des transferts air-mer de qualité.",
+                "about.feat2_title": "Emballage Sécurisé",
+                "about.feat2_desc": "Emballages antichocs industriels, conteneurs logistiques sur mesure et capteurs télémétriques thermorégulés pour prévenir tout incident durant le transit de vos stocks délicats.",
+                "stats.subtitle": "Quelques Chiffres",
+                "stats.title": "#1 Espace de Gestion Globale pour vos Cargaisons",
+                "stats.desc": "Nous opérons à la pointe de l'ingénierie des transports modernes. De la gestion d'un colis express individuel au pilotage de flottes entières de conteneurs maritimes, notre tableau de bord centralisé garantit une transparence absolue.",
+                "stats.happy": "Clients Satisfaits",
+                "stats.reviews": "Avis Clients",
+                "stats.shipments": "Livraisons Effectuées",
+                "stats.workers": "Experts Logistiques",
+                "quote.subtitle": "Obtenir un Devis",
+                "quote.title": "Demandez un Devis Gratuit !",
+                "quote.lbl_name": "Votre Nom",
+                "quote.ph_name": "Jean Dupont",
+                "quote.lbl_email": "Votre E-mail",
+                "quote.lbl_phone": "Votre Téléphone",
+                "quote.lbl_service": "Sélectionner un Service",
+                "quote.lbl_note": "Note Spéciale",
+                "quote.ph_note": "Décrivez vos besoins logistiques...",
+                "quote.btn_submit": "Soumettre la Demande",
+                "testimonial.subtitle": "Témoignages",
+                "testimonial.title": "Ce Que Disent Nos Clients !",
+                "testimonial.client1_desc": ' "CargoTracker a totalement transformé notre modèle de distribution internationale. Leur suivi télémétrique en direct et leur dédouanement automatisé nous ont fait économiser plus de 40 heures de gestion administrative dès le premier mois. Les délais de transit sont d\'une précision absolue." ',
+                "testimonial.client1_role": "Directeur Logistique, TechCorp",
+                "testimonial.client2_desc": ' "Piloter une chaîne d\'approvisionnement nationale complexe exige un timing irréprochable. CargoTracker offre une fiabilité constante sur nos flux routiers et ferroviaires. Leur estimateur de tarif instantané simplifie toute notre planification." ',
+                "testimonial.client2_role": "Dir. Supply Chain, PrimeGoods",
+                "testimonial.client3_desc": ' "Lors d\'un blocage douanier maritime critique, les équipes dédiées de CargoTracker sont intervenues instantanément pour mettre à jour les déclarations. Ce service proactif nous a épargné des milliers de dollars de frais portuaires." ',
+                "testimonial.client3_role": "Directeur des Opérations, GlobaRetail",
+                "contact.subtitle": "Contactez-nous",
+                "contact.title": "Contactez-nous pour toute demande",
+                "contact.desc": "Nos experts sont à votre écoute 24h/24 et 7j/7 pour répondre à toutes vos questions relatives au transport, à la logistique, au suivi et à la gestion de fret.",
+                "contact.card1_title": "Adresse du Bureau",
+                "contact.card1_desc": "Brooklyn, New York, USA",
+                "contact.card2_title": "Téléphone d'Urgence",
+                "contact.card3_title": "Assistance E-mail",
+                "footer.desc": "Fournisseur mondial de services de transport certifiés, d'expédition de fret international et de solutions d'entreposage dans plus de 180 pays depuis 1990.",
+                "footer.title_services": "Services",
+                "footer.title_links": "Liens Rapides",
+                "footer.title_newsletter": "Newsletter",
+                "footer.newsletter_desc": "Restez informé des tendances du transport mondial, des évolutions douanières et de nos innovations logistiques.",
+                "footer.ph_email": "Votre E-mail",
+                "footer.btn_signup": "S'inscrire",
+                "footer.copyright": "Tous droits réservés.",
+                "modal.btn_close": "Fermer la Fenêtre",
+                "manifest.modal_title": "Manifeste de Cargaison & Connaissement",
+                "manifest.bill_title": "Déclaration de Lettre de Voiture & Titre de Sécurité",
+                "manifest.date_generated": "Date d'Émission",
+                "manifest.lbl_origin": "Expéditeur / Origine",
+                "manifest.lbl_origin_sub": "Site Logistique Agréé",
+                "manifest.lbl_dest": "Destinataire / Destination",
+                "manifest.lbl_dest_sub": "Lieu de Livraison Sécurisé",
+                "manifest.col_id": "Code Suivi",
+                "manifest.col_class": "Classe de Service",
+                "manifest.col_weight": "Poids Net",
+                "manifest.col_dimensions": "Dimensions",
+                "manifest.lbl_barcode": "Code Manifeste Numérique",
+                "manifest.electronic_signature": "Signature Électronique Vérifiée",
+                "manifest.btn_close": "Fermer le Manifeste",
+                "manifest.btn_print": "Imprimer le Document"
+            },
+            de: {
+                "topbar.location": '<i class="fa-solid fa-map-marker-alt text-primary mr-2"></i> Brooklyn, New York, USA',
+                "nav.home": "Startseite",
+                "nav.track": "Verfolgung",
+                "nav.about": "Über uns",
+                "nav.services": "Dienstleistungen",
+                "nav.quote": "Angebot",
+                "nav.testimonial": "Bewertungen",
+                "nav.contact": "Kontakt",
+                "nav.call_query": "Rufen Sie uns an",
+                "nav.select_lang": "Sprache wählen",
+                "hero.subtitle": "Transport- & Logistiklösungen",
+                "hero.title": 'Ihr Platz Nr. 1 für <span class="text-primary">Fracht</span>-Lösungen',
+                "hero.desc": "Sichern Sie sich lückenlose Sendungsverfolgung und hochpräzisen Gütertransport mit unserem Logistik-Intelligenzsystem. Wir bringen Vertrauen über See, Land und Luft.",
+                "hero.btn_track": "Paket verfolgen",
+                "hero.btn_quote": "Kostenloses Angebot",
+                "tracker.telemetry": '<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span> Globale Live-Telemetrie',
+                "tracker.title": "Enterprise Frachtverfolgung",
+                "tracker.desc": "Suchen Sie in Frachtdatenbanken nach aktiven Routenprotokollen. Geben Sie Ihre eindeutige Tracking-ID ein, die im Betriebsportal erstellt wurde.",
+                "tracker.placeholder": "z.B. SH-12345",
+                "tracker.btn_locate": "Fracht lokalisieren",
+                "tracker.col_waybill": "Aktiver Frachtbrief",
+                "tracker.col_service": "Service-Level",
+                "tracker.col_checkpoint": "Letzter Kontrollpunkt",
+                "tracker.col_delivery": "Lieferziel",
+                "tracker.pipeline": "Transportweg-Status",
+                "tracker.step1": "Manifest gesendet",
+                "tracker.step2": "Frachtübergabe",
+                "tracker.step3": "In Überführung",
+                "tracker.step4": "Zugestellt",
+                "tracker.inv_title": "Frachtinventar & Telemetrie",
+                "tracker.lbl_origin": "Versender / Herkunft",
+                "tracker.lbl_dest": "Empfänger / Bestimmungsort",
+                "tracker.lbl_weight": "Bruttogewicht der Ladung",
+                "tracker.lbl_dimensions": "Abmessungen (L×B×H)",
+                "tracker.lbl_sensor": "Behälter-Telemetrie",
+                "tracker.barcode_lbl": "Sicherheits-Verifizierungscode",
+                "tracker.btn_manifest": "Manifest-Rechnung",
+                "tracker.btn_support": "Support-Zentrale",
+                "tracker.ledger_title": "Routen-Protokollbuch",
+                "services.subtitle": "Unsere Dienstleistungen",
+                "services.title": "Entdecken Sie unsere Dienste",
+                "services.air_title": "Luftfracht",
+                "services.air_desc": "Prioritäre Lufttransportlösungen mit Linienflügen und Charterfrachtflugzeugen zur Gewährleistung einer schnellen, zeitsensiblen Lieferung an globale Ziele.",
+                "services.ocean_title": "Seefracht",
+                "services.ocean_desc": "Kostengünstiger Seetransport für Vollcontainerladungen (FCL) und Teilladungen (LCL), verwaltet durch strategische Abkommen mit großen Reedereien.",
+                "services.road_title": "Straßenfracht",
+                "services.road_desc": "Flexible Fernverkehrs- und Tür-zu-Tür-Lieferungen über weitreichende nationale Netze mit modernen, GPS-gestützten und temperaturgeführten Flotten.",
+                "services.train_title": "Schienenfracht",
+                "services.train_desc": "Nachhaltiger Schienengüterverkehr mit hoher Kapazität zur Verbindung wichtiger Industriezonen, der ein ideales Gleichgewicht zwischen Laufzeit und Budget bietet.",
+                "services.customs_title": "Zollabwicklung",
+                "services.customs_desc": "Optimierte Zollmakler- und Compliance-Dienste durch zertifizierte Agenten zur Beschleunigung der Import- und Exportzollabfertigung an Häfen und Grenzen.",
+                "services.warehouse_title": "Lagerlösungen",
+                "services.warehouse_desc": "Modernste sichere Lagerung mit digitaler Manifestkontrolle, fortschrittlicher Bestandsverfolgung, thermischer Kontrolle und Express-Versandrampen.",
+                "about.subtitle": "Über uns",
+                "about.title": "Schnelle Transport- und Frachtlösungen",
+                "about.desc": "Bei CargoTracker definieren wir die internationale Logistik durch technologiegestützte Verkehrsnetze, strenge Qualitätsstandards und tiefes Branchenwissen neu. Wir bauen widerstandsfähige Lieferketten auf, mit denen Unternehmen aller Größen weltweit sicher importieren, exportieren und skalieren können.",
+                "about.card1_title": "Globale Abdeckung",
+                "about.card1_desc": "Zugang zu über 180 Ländern durch ein tief integriertes multimodales Partnernetzwerk.",
+                "about.card2_title": "Pünktliche Lieferung",
+                "about.card2_desc": "Erreichen einer konstanten pünktlichen Zustellungsrate von 99,4% durch moderne Routenoptimierungssysteme.",
+                "about.btn_more": "Mehr entdecken",
+                "about.feat_subtitle": "Unsere Merkmale",
+                "about.feat_title": "Wir sind ein vertrauenswürdiges Frachtunternehmen seit 1990",
+                "about.feat1_title": "Weltweiter Service",
+                "about.feat1_desc": "Verbinden Sie nahtlos kontinentübergreifende Lieferketten mit automatisierter Einreichung von Zolldokumenten, lokalisierten Abfertigungsprotokollen und erstklassigen Luft-zu-See-Transportübergaben.",
+                "about.feat2_title": "Sichere Verpackung",
+                "about.feat2_desc": "Industrietaugliche, stoßfeste Verpackung, maßgeschneiderte Logistikbehälter und temperaturgesteuerte Telemetriesysteme verhindern Transportschäden bei empfindlichen Gütern.",
+                "stats.subtitle": "Einige Fakten",
+                "stats.title": "Der Ort Nr. 1 zur Verwaltung Ihrer gesamten Fracht",
+                "stats.desc": "Wir arbeiten an der Spitze der modernen Transittechnik. Von der Verwaltung einzelner Express-Kuriersendungen bis hin zum Betrieb dedizierter Seefrachtnetzwerke garantiert unser zentrales Dashboard vollständige Transparenz von Ende zu Ende.",
+                "stats.happy": "Zufriedene Kunden",
+                "stats.reviews": "Kundenbewertungen",
+                "stats.shipments": "Abgeschlossene Sendungen",
+                "stats.workers": "Logistikexperten",
+                "quote.subtitle": "Angebot einholen",
+                "quote.title": "Fordern Sie ein kostenloses Angebot an!",
+                "quote.lbl_name": "Ihr Name",
+                "quote.ph_name": "Max Mustermann",
+                "quote.lbl_email": "Ihre E-Mail",
+                "quote.lbl_phone": "Ihre Telefonnummer",
+                "quote.lbl_service": "Service auswählen",
+                "quote.lbl_note": "Besondere Anmerkung",
+                "quote.ph_note": "Beschreiben Sie Ihre logistischen Anforderungen...",
+                "quote.btn_submit": "Anfrage absenden",
+                "testimonial.subtitle": "Kundenstimmen",
+                "testimonial.title": "Das sagen unsere Kunden!",
+                "testimonial.client1_desc": ' "CargoTracker hat unser globales Vertriebsmodell komplett verändert. Die Echtzeit-Telemetrieverfolgung und die automatisierte Zollabfertigung haben uns im ersten Monat über 40 Stunden Verwaltungsaufwand erspart. Die Laufzeiten sind unglaublich präzise." ',
+                "testimonial.client1_role": "Logistikleiter, TechCorp",
+                "testimonial.client2_desc": ' "Der Betrieb einer komplexen, landesweiten Einzelhandels-Lieferkette erfordert fehlerfreies Timing. CargoTracker bietet konstante Zuverlässigkeit auf Schiene und Straße. Der Sofortpreis-Kalkulator macht die Planung einfach." ',
+                "testimonial.client2_role": "Leiterin Lieferkette, PrimeGoods",
+                "testimonial.client3_desc": ' "Während eines kritischen Zollstopps in der Seefracht griffen die engagierten Support-Mitarbeiter von CargoTracker sofort ein, um die Deklarationsdateien zu aktualisieren. Dieser proaktive Service sparte uns Tausende an Hafengebühren." ',
+                "testimonial.client3_role": "Betriebsleiter (COO), GlobaRetail",
+                "contact.subtitle": "Kontakt aufnehmen",
+                "contact.title": "Kontaktieren Sie uns bei Fragen",
+                "contact.desc": "Unsere Experten stehen Ihnen rund um die Uhr zur Verfügung, um Ihre Fragen zu Logistik, Transport, Sendungsverfolgung und Frachtmanagement zu beantworten.",
+                "contact.card1_title": "Büroadresse",
+                "contact.card1_desc": "Brooklyn, New York, USA",
+                "contact.card2_title": "Notfalltelefon",
+                "contact.card3_title": "E-Mail-Support",
+                "footer.desc": "Bereitstellung von erstklassigen, zertifizierten Transporten, weltweiten Frachtverschiffungen und Lagerdienstleistungen in über 180 Ländern seit 1990.",
+                "footer.title_services": "Dienste",
+                "footer.title_links": "Schnellzugriff",
+                "footer.title_newsletter": "Newsletter",
+                "footer.newsletter_desc": "Bleiben Sie über globale Versandtrends, Zolländerungen und Logistiklösungen auf dem Laufenden.",
+                "footer.ph_email": "Ihre E-Mail",
+                "footer.btn_signup": "Anmelden",
+                "footer.copyright": "Alle Rechte vorbehalten.",
+                "modal.btn_close": "Fenster schließen",
+                "manifest.modal_title": "Frachtmanifest & Konnossement",
+                "manifest.bill_title": "Frachtbriefdeklaration & Sicherheitsnachweis",
+                "manifest.date_generated": "Erstellungsdatum",
+                "manifest.lbl_origin": "Versender / Herkunft",
+                "manifest.lbl_origin_sub": "Zugelassene Logistikbetriebsstätte",
+                "manifest.lbl_dest": "Empfänger / Bestimmungsort",
+                "manifest.lbl_dest_sub": "Gesicherte Lieferadresse",
+                "manifest.col_id": "Tracking-ID",
+                "manifest.col_class": "Frachtservice-Klasse",
+                "manifest.col_weight": "Nettogewicht",
+                "manifest.col_dimensions": "Abmessungen",
+                "manifest.lbl_barcode": "Digitaler Manifestschlüssel",
+                "manifest.electronic_signature": "Elektronisch verifizierte Signatur",
+                "manifest.btn_close": "Schließen",
+                "manifest.btn_print": "Dokument drucken"
+            },
+            zh: {
+                "topbar.location": '<i class="fa-solid fa-map-marker-alt text-primary mr-2"></i> 美国纽约布鲁克林',
+                "nav.home": "首页",
+                "nav.track": "货物追踪",
+                "nav.about": "关于我们",
+                "nav.services": "服务项目",
+                "nav.quote": "在线报价",
+                "nav.testimonial": "客户评价",
+                "nav.contact": "联系我们",
+                "nav.call_query": "业务咨询热线",
+                "nav.select_lang": "选择语言",
+                "hero.subtitle": "全球物流与货运解决方案",
+                "hero.title": '您最理想的<span class="text-primary">货物</span>运输方案首选地',
+                "hero.desc": "依托我们卓越的货物智能管理系统，保障无懈可击的全程追踪和极度精准的物资运输。海、陆、空全方位，为您护航递送信心。",
+                "hero.btn_track": "追踪包裹",
+                "hero.btn_quote": "免费获取报价",
+                "tracker.telemetry": '<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span> 全球实时遥测中',
+                "tracker.title": "企业级货运追踪系统",
+                "tracker.desc": "实时查询货运数据库，获取最新路线日志。请输入您在业务门户中创建的唯一追踪ID。",
+                "tracker.placeholder": "例如: SH-12345",
+                "tracker.btn_locate": "定位货物",
+                "tracker.col_waybill": "当前活动运单",
+                "tracker.col_service": "服务时效级别",
+                "tracker.col_checkpoint": "最新检查站",
+                "tracker.col_delivery": "预计送达目标",
+                "tracker.pipeline": "运输管线进度",
+                "tracker.step1": "舱单已发送",
+                "tracker.step2": "货物交接中",
+                "tracker.step3": "在途运输中",
+                "tracker.step4": "派送完毕/已妥投",
+                "tracker.inv_title": "货物清单与传感器状态",
+                "tracker.lbl_origin": "发货方 / 起始地",
+                "tracker.lbl_dest": "收货方 / 目的地",
+                "tracker.lbl_weight": "货物毛重",
+                "tracker.lbl_dimensions": "尺寸 (长×宽×高)",
+                "tracker.lbl_sensor": "集装箱温度 telemetry",
+                "tracker.barcode_lbl": "安全验证数字条形码",
+                "tracker.btn_manifest": "海运/空运舱单证明",
+                "tracker.btn_support": "在线客服支持",
+                "tracker.ledger_title": "全程运输轨迹账簿",
+                "services.subtitle": "我们的服务",
+                "services.title": "探索专业物流服务",
+                "services.air_title": "航空货运",
+                "services.air_desc": "高效可靠的航空运输解决方案。通过定期航班或货运包机，确保时效性极强的货件快速、安全送达全球目的地。",
+                "services.ocean_title": "海洋货运",
+                "services.ocean_desc": "提供高性价比的整箱 (FCL) 及拼箱 (LCL) 海运服务，与全球主要船务公司签有长期战略协议，确保舱位充裕。",
+                "services.road_title": "公路运输",
+                "services.road_desc": "灵活的跨国长途卡车运输及门到门分拨服务。拥有GPS实时定位监控、温控车厢以及现代化车队。",
+                "services.train_title": "铁路货运",
+                "services.train_desc": "高运量、可持续的欧亚/跨国洲际陆路铁路联运服务，在运输时效与物流预算之间实现完美平衡。",
+                "services.customs_title": "报关与清关",
+                "services.customs_desc": "由专业持证报关行提供的简化合规报关服务，快速办理空运枢纽、陆路口岸和港口的进出口清关手续。",
+                "services.warehouse_title": "仓储一体化方案",
+                "services.warehouse_desc": "配备智能控制、先进库存追踪、冷链恒温存储区及快速分拨出库通道的现代化、高安全性仓储中心。",
+                "about.subtitle": "关于我们",
+                "about.title": "快捷、安全、智能的货运专家",
+                "about.desc": "在 CargoTracker，我们利用先进的技术网络、严苛的质量标准和资深的行业积淀重新定义全球物流。我们构建具有抗风险能力的供应链，帮助各类规模的企业在国际贸易和全球扩张中免除后顾之忧。",
+                "about.card1_title": "全球网络覆盖",
+                "about.card1_desc": "依托深度整合的多式联运合作伙伴网络，服务触达全球180多个国家和地区。",
+                "about.card2_title": "极高准时率",
+                "about.card2_desc": "得益于现代化的智能路线优化系统，我们保持着99.4%的货物准时送达率。",
+                "about.btn_more": "阅读更多",
+                "about.feat_subtitle": "我们的核心优势",
+                "about.feat_title": "自1990年起值得信赖的卓越国际货运公司",
+                "about.feat1_title": "跨国多式联运",
+                "about.feat1_desc": "实现跨洲供应链无缝衔接，提供自动化报关单证处理、本地化海关事务协调以及高质量的空海联运接驳。",
+                "about.feat2_title": "工业级安全包装",
+                "about.feat2_desc": "采用高强度工业避震包装、定制化物流集装箱和温度传感遥测技术，防止贵重及敏感物资产送在途损坏。",
+                "stats.subtitle": "实力见证",
+                "stats.title": "您最省心的全方位货运管理管家",
+                "stats.desc": "我们走在现代化物流运输工程的前沿。无论管理单个急件派送，还是运营庞大的海运集装箱网络，我们的一体化中央控制台均能提供端到端的透明度。",
+                "stats.happy": "服务客户数",
+                "stats.reviews": "客户好评量",
+                "stats.shipments": "累计完成运单",
+                "stats.workers": "资深物流专家",
+                "quote.subtitle": "在线估价",
+                "quote.title": "免费获取您的专属物流方案报价！",
+                "quote.lbl_name": "您的姓名",
+                "quote.ph_name": "例如：张经理",
+                "quote.lbl_email": "电子邮箱",
+                "quote.lbl_phone": "联系电话",
+                "quote.lbl_service": "选择所需服务",
+                "quote.lbl_note": "特别备注/要求",
+                "quote.ph_note": "请描述您的货物信息及特定配送时效需求...",
+                "quote.btn_submit": "提交申请",
+                "testimonial.subtitle": "客户评价",
+                "testimonial.title": "听听合作伙伴怎么说！",
+                "testimonial.client1_desc": ' "CargoTracker 彻底颠覆了我们的全球分拨模式。他们的实时遥测追踪和自动化清关系统在第一个月就为我们节省了超过40个小时的文书成本。时效精准到令人惊叹。" ',
+                "testimonial.client1_role": "TechCorp 物流部总监, Daniel Carter",
+                "testimonial.client2_desc": ' "管理全国性的复杂零售供应链，时间节点不能出任何差错。CargoTracker 在公路和铁路联运上提供了惊人的稳定性。在线运价估算功能也让预算规划变得非常简单。" ',
+                "testimonial.client2_role": "PrimeGoods 供应链总监, Sophia Bennett",
+                "testimonial.client3_desc": ' "在一次严重的海关滞报突发状况中，CargoTracker 资深客户主任立即介入，更新并补全了申报单证。他们的主动服务为我们避免了高昂的港口滞期费罚款。" ',
+                "testimonial.client3_role": "GlobaRetail 首席运营官, Ethan Vance",
+                "contact.subtitle": "联系我们",
+                "contact.title": "随时欢迎您的业务咨询",
+                "contact.desc": "我们的物流专家提供24/7全天候咨询服务，随时为您解答有关运价、路线规划、进出口合规等相关问题。",
+                "contact.card1_title": "公司总部地址",
+                "contact.card1_desc": "美国纽约布鲁克林",
+                "contact.card2_title": "紧急联络电话",
+                "contact.card3_title": "业务咨询邮箱",
+                "footer.desc": "自1990年起，为全球180多个国家和地区提供高标准的优质仓储、国际货运以及安全、绿色的供应链配送服务。",
+                "footer.title_services": "服务板块",
+                "footer.title_links": "快捷链接",
+                "footer.title_newsletter": "订阅最新资讯",
+                "footer.newsletter_desc": "第一时间获取全球航运趋势分析、海关最新合规政策及专享物流优惠信息。",
+                "footer.ph_email": "您的电子邮箱",
+                "footer.btn_signup": "订阅",
+                "footer.copyright": "保留所有权利。",
+                "modal.btn_close": "关闭窗口",
+                "manifest.modal_title": "货物报关提单与集装箱载货清单",
+                "manifest.bill_title": "国际运单申报与安全舱单证照",
+                "manifest.date_generated": "单证生成时间",
+                "manifest.lbl_origin": "发货方 / 装货港",
+                "manifest.lbl_origin_sub": "核准的物流中心节点",
+                "manifest.lbl_dest": "收货方 / 卸货港",
+                "manifest.lbl_dest_sub": "安全最终目的地节点",
+                "manifest.col_id": "运单追踪ID",
+                "manifest.col_class": "货运服务等级",
+                "manifest.col_weight": "净重",
+                "manifest.col_dimensions": "体积尺寸",
+                "manifest.lbl_barcode": "数字提货确认安全密钥",
+                "manifest.electronic_signature": "此文件已通过CargoTracker电子签章验证有效",
+                "manifest.btn_close": "关闭提单",
+                "manifest.btn_print": "打印提货单证"
+            }
+        };
+
+        let currentLang = localStorage.getItem('cargo_lang') || 'en';
+
+        // Translate the entire page dynamically
+        function translatePage() {
+            const dictionary = translations[currentLang] || translations['en'];
+            
+            // Elements with standard text / html translation
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dictionary[key]) {
+                    el.innerHTML = dictionary[key];
+                }
+            });
+
+            // Input fields placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (dictionary[key]) {
+                    el.setAttribute('placeholder', dictionary[key]);
+                }
+            });
+
+            // Keep tracking labels translated inside current object if visible
+            if (window.currentTrackedCargo) {
+                const badge = document.getElementById('trackStatusBadge');
+                if (badge && currentLang !== 'en') {
+                    // Update stepper text mapping logically if found
+                    const step1 = document.getElementById('step1Time');
+                    const step2 = document.getElementById('step2Time');
+                    const step3 = document.getElementById('step3Time');
+                    const step4 = document.getElementById('step4Time');
+
+                    if (step1 && step1.innerText === 'Ready') step1.innerText = (currentLang === 'es') ? 'Listo' : (currentLang === 'fr') ? 'Prêt' : (currentLang === 'de') ? 'Bereit' : '就绪';
+                    if (step2 && step2.innerText === 'Pending') step2.innerText = (currentLang === 'es') ? 'Pendiente' : (currentLang === 'fr') ? 'En attente' : (currentLang === 'de') ? 'Ausstehend' : '等待中';
+                    if (step3 && step3.innerText === 'Pending') step3.innerText = (currentLang === 'es') ? 'Pendiente' : (currentLang === 'fr') ? 'En attente' : (currentLang === 'de') ? 'Ausstehend' : '等待中';
+                    if (step4 && step4.innerText === 'Pending') step4.innerText = (currentLang === 'es') ? 'Pendiente' : (currentLang === 'fr') ? 'En attente' : (currentLang === 'de') ? 'Ausstehend' : '等待中';
+                }
+            }
+        }
+
+        // Apply language choice and save configuration
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('cargo_lang', lang);
+
+            const labels = {
+                en: 'English',
+                es: 'Español',
+                fr: 'Français',
+                de: 'Deutsch',
+                zh: '中文'
+            };
+
+            // Sync visual states on both selectors
+            if (document.getElementById('currentLangLabel')) {
+                document.getElementById('currentLangLabel').innerText = labels[lang];
+            }
+            if (document.getElementById('mobileLangSelect')) {
+                document.getElementById('mobileLangSelect').value = lang;
+            }
+
+            translatePage();
+        }
+
+        // Standard Document On-Load Bindings
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initiate Localization System immediately
+            setLanguage(currentLang);
+
+            // Desktop Dropdown Switcher Event Handlers
+            const langDropdownBtn = document.getElementById('langDropdownBtn');
+            const langDropdownMenu = document.getElementById('langDropdownMenu');
+
+            if (langDropdownBtn && langDropdownMenu) {
+                langDropdownBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    langDropdownMenu.classList.toggle('hidden');
+                });
+
+                document.addEventListener('click', () => {
+                    langDropdownMenu.classList.add('hidden');
+                });
+            }
+        });
+
+        // Track Mobile Menu Drawer status
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileDrawer.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileDrawer.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars';
+            } else {
+                icon.className = 'fa-solid fa-xmark';
+            }
+        });
+
+        // Close mobile menu when user clicks a drawer link
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileDrawer.classList.add('hidden');
+                mobileMenuBtn.querySelector('i').className = 'fa-solid fa-bars';
+            });
+        });
+
+        // Testimonial Carousel logic
+        let currentSlideIndex = 0;
+        const totalSlides = 3;
+        const container = document.getElementById('testimonialContainer');
+        const dots = document.querySelectorAll('.slide-dot');
+
+        function updateSlider() {
+            container.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                if (index === currentSlideIndex) {
+                    dot.className = 'slide-dot w-3 h-3 rounded-full bg-primary transition-colors duration-300';
+                } else {
+                    dot.className = 'slide-dot w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-colors duration-300';
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            updateSlider();
+        }
+
+        // Auto slide every 8 seconds
+        setInterval(nextSlide, 8000);
+
+        // Stats counter animation logic
+        const counters = document.querySelectorAll('.count-up');
+        const options = {
+            threshold: 0.5,
+            rootMargin: "0px"
+        };
+
+        const countObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    let count = 0;
+                    const speed = target / 80; // duration control
+
+                    const updateCount = () => {
+                        if (count < target) {
+                            count = Math.min(target, Math.ceil(count + speed));
+                            counter.innerText = count.toLocaleString();
+                            setTimeout(updateCount, 15);
+                        } else {
+                            counter.innerText = target.toLocaleString();
+                        }
+                    };
+
+                    updateCount();
+                    observer.unobserve(counter);
+                }
+            });
+        }, options);
+
+        counters.forEach(counter => countObserver.observe(counter));
+
+        // Year updater
+        document.getElementById('currentYear').innerText = new Date().getFullYear();
+
+        // Modal triggers
+        const statusModal = document.getElementById('statusModal');
+        const modalCard = document.getElementById('modalCard');
+
+        // Main status alerts
+        function openStatusModal(title, msg, isSuccess = true) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerText = msg;
+            
+            const icon = document.getElementById('modalIcon');
+            if (isSuccess) {
+                icon.className = "w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl mx-auto mb-4";
+                icon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            } else {
+                icon.className = "w-16 h-16 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-3xl mx-auto mb-4";
+                icon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+            }
+
+            statusModal.classList.remove('hidden');
+            setTimeout(() => {
+                modalCard.classList.remove('scale-95', 'opacity-0');
+                modalCard.classList.add('scale-100', 'opacity-100');
+            }, 50);
+        }
+
+        function closeStatusModal() {
+            modalCard.classList.remove('scale-100', 'opacity-100');
+            modalCard.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                statusModal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Form handlers
+        function handleQuoteSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('quoteName').value;
+            const email = document.getElementById('quoteEmail').value;
+            const service = document.getElementById('quoteService').value;
+
+            const localizedTitle = (currentLang === 'es') ? '¡Solicitud de Cotización Recibida!' : (currentLang === 'fr') ? 'Demande de Devis Reçue !' : (currentLang === 'de') ? 'Angebotsanfrage erhalten!' : (currentLang === 'zh') ? '报价申请已提交！' : 'Quote Request Received!';
+            const localizedMessage = (currentLang === 'es') ? `Gracias ${name}. Nuestro equipo logístico recibió su consulta de "${service}". Responderemos pronto a ${email}.` : (currentLang === 'fr') ? `Merci ${name}. Notre équipe a reçu votre demande de service "${service}". Nous vous répondrons à ${email}.` : (currentLang === 'de') ? `Danke ${name}. Unser Logistikteam hat Ihre Anfrage für "${service}" erhalten. Wir antworten an ${email}.` : (currentLang === 'zh') ? `非常感谢 ${name}。我们的货运专员已收到您关于“${service}”服务的咨询，稍后会将方案发送至您的邮箱：${email}。` : `Thank you ${name}. Our logistics expert team has received your inquiry for "${service}" service. We will review the parameters and email you back at ${email} shortly.`;
+
+            openStatusModal(localizedTitle, localizedMessage);
+            document.getElementById('quoteForm').reset();
+        }
+
+        // Newsletter Handler
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsEmail').value;
+
+            const localizedTitle = (currentLang === 'es') ? '¡Suscripción Exitosa!' : (currentLang === 'fr') ? 'Inscription Réussie !' : (currentLang === 'de') ? 'Erfolgreich abonniert!' : (currentLang === 'zh') ? '订阅成功！' : 'Subscribed Successfully!';
+            const localizedMessage = (currentLang === 'es') ? `Se ha suscrito al boletín de CargoTracker. Recibirá novedades periódicas en ${email}.` : (currentLang === 'fr') ? `Inscription réussie à la newsletter de CargoTracker. Les actualités seront envoyées à ${email}.` : (currentLang === 'de') ? `Erfolgreich abonniert. Transport-Updates werden regelmäßig an ${email} gesendet.` : (currentLang === 'zh') ? `您已成功订阅 CargoTracker 国际货运周刊，最新行业动态及政策调整将发送至：${email}。` : `You have successfully subscribed to the CargoTracker newsletter. Global cargo insights and transport updates will be delivered periodically to ${email}.`;
+
+            openStatusModal(localizedTitle, localizedMessage);
+            document.getElementById('newsEmail').value = "";
+        }
+
+        // Live API call tracking database resolver
+        async function handleLiveTrack(e) {
+            if (e) e.preventDefault();
+            const query = document.getElementById('trackingIDInput').value.trim().toUpperCase();
+            const outputPanel = document.getElementById('trackingOutputPanel');
+
+            let result = null;
+
+            try {
+                // Request shipment metadata from the external live Node.js Express server
+                const response = await fetch(`/api/shipments/${query}`);
+                if (response.ok) {
+                    result = await response.json();
+                } else {
+                    console.warn(`Live server returned non-OK status code: ${response.status}`);
+                }
+            } catch (err) {
+                console.warn('API database connection failed:', err);
+            }
+
+            // If the shipment is not found on your Node.js backend server, cleanly raise an unregistered alert
+            if (!result) {
+                outputPanel.classList.add('hidden');
+                
+                const localizedTitle = (currentLang === 'es') ? 'Carga no registrada' : (currentLang === 'fr') ? 'Code de Fret Non Enregistré' : (currentLang === 'de') ? 'Fracht-ID nicht registriert' : (currentLang === 'zh') ? '该运单号未注册' : 'Cargo ID Unregistered';
+                const localizedMessage = (currentLang === 'es') ? `El código de carta de porte "${query}" no se reconoce en nuestra base de datos activa. Verifique el código con su centro de envío.` : (currentLang === 'fr') ? `Le code "${query}" n'est pas reconnu dans notre base de données. Veuillez vérifier l'identifiant auprès de votre expéditeur.` : (currentLang === 'de') ? `Der Frachtbriefcode "${query}" wird in unserer aktiven Datenbank nicht erkannt. Bitte überprüfen Sie Ihre Tracking-ID.` : (currentLang === 'zh') ? `在我们的活跃物流数据库中找不到单号为 “${query}” 的运单记录。请向您的货运客服主管核对单号是否正确。` : `The Waybill Code "${query}" could not be recognized on our active database records. Please verify your tracking ID with your dispatch hub manager.`;
+
+                openStatusModal(localizedTitle, localizedMessage, false);
+                return;
+            }
+
+            // Cache global current track object to use inside modal invoices
+            window.currentTrackedCargo = result;
+            window.currentTrackedCargoID = query;
+
+            // Fill text fields
+            document.getElementById('trackWaybillID').innerText = result.waybill;
+            document.getElementById('trackService').innerText = result.service;
+            document.getElementById('trackETA').innerText = result.eta;
+            document.getElementById('trackLoc').innerText = result.location;
+            
+            // Sidebar fields
+            document.getElementById('trackShipper').innerText = result.shipper;
+            document.getElementById('trackReceiver').innerText = result.receiver;
+            document.getElementById('trackWeight').innerText = result.weight;
+            document.getElementById('trackDimensions').innerText = result.dimensions;
+            document.getElementById('trackSensor').innerHTML = `<i class="fa-solid fa-temperature-three-quarters animate-pulse"></i> ${result.tempSensor}`;
+            document.getElementById('trackBarcodeGraphic').innerText = result.barcode;
+
+            const badge = document.getElementById('trackStatusBadge');
+            badge.innerText = result.status;
+            badge.className = `text-xs font-extrabold uppercase px-2.5 py-1 rounded ${result.badgeClass}`;
+
+            // Handle progress stepper visual styling updates
+            for (let i = 1; i <= 4; i++) {
+                const circle = document.getElementById(`step${i}Circle`);
+                const timeLabel = document.getElementById(`step${i}Time`);
+                timeLabel.innerText = result.times[i-1];
+
+                if (i <= result.step) {
+                    // Completed step style matching theme coral red
+                    circle.className = "w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-2 shadow-lg scale-110 transition-all duration-300 relative z-10";
+                    circle.innerHTML = '<i class="fa-solid fa-check text-xs"></i>';
+                } else {
+                    // Pending step style
+                    circle.className = "w-10 h-10 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center font-bold mb-2 transition-all duration-300 relative z-10";
+                    circle.innerText = i;
+                }
+            }
+
+            // Animate connector line progress
+            const progressLine = document.getElementById('progressLineFill');
+            if (result.step === 1) progressLine.style.background = 'linear-gradient(to right, #FF3E41 0%, #1e293b 20%)';
+            else if (result.step === 2) progressLine.style.background = 'linear-gradient(to right, #FF3E41 40%, #1e293b 50%)';
+            else if (result.step === 3) progressLine.style.background = 'linear-gradient(to right, #FF3E41 70%, #1e293b 80%)';
+            else if (result.step === 4) progressLine.style.background = '#FF3E41';
+
+            // Build Route Log Ledger list dynamically
+            const timelineContainer = document.getElementById('timelineLedgerContainer');
+            timelineContainer.innerHTML = ''; // Clear previous
+
+            result.timeline.forEach((event, idx) => {
+                const isActive = idx === 0;
+                const itemHTML = `
+                    <div class="relative pl-6 animate-fadeIn">
+                        <!-- Left indicator circle dot -->
+                        <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 ${isActive ? 'bg-primary border-primary animate-pulse' : 'bg-slate-900 border-slate-700'} flex items-center justify-center">
+                            <div class="w-1.5 h-1.5 rounded-full ${isActive ? 'bg-white' : 'bg-slate-700'}"></div>
+                        </div>
+                        
+                        <!-- Event info body card -->
+                        <div class="bg-slate-950/40 border ${isActive ? 'border-primary/30 bg-primary/5' : 'border-slate-800/60'} p-4 rounded-xl">
+                            <div class="flex flex-wrap justify-between items-center gap-2 mb-2">
+                                <span class="text-xs font-bold text-slate-400"><i class="fa-solid fa-calendar-day mr-1"></i> ${event.time}</span>
+                                <span class="bg-slate-900 text-slate-300 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-slate-800">${event.loc}</span>
+                            </div>
+                            <h5 class="font-heading font-extrabold text-sm text-white flex items-center gap-2">
+                                <i class="fa-solid ${event.icon} text-xs text-primary"></i> ${event.event}
+                            </h5>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed">${event.desc}</p>
+                        </div>
+                    </div>
+                `;
+                timelineContainer.insertAdjacentHTML('beforeend', itemHTML);
+            });
+
+            // Make container visible
+            outputPanel.classList.remove('hidden');
+            outputPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Re-apply language updates to any newly loaded container nodes
+            translatePage();
+        }
+
+        /* ACTIONS: MANIFEST / PRINT DOCUMENT UTILITIES */
+        const manifestModal = document.getElementById('manifestModal');
+
+        function triggerPODModal() {
+            const data = window.currentTrackedCargo;
+            const query = window.currentTrackedCargoID;
+            if(!data) return;
+
+            // Dynamically generate the current date when clicked
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const today = new Date().toLocaleDateString('en-US', options);
+            document.getElementById('manifestDate').innerText = today;
+
+            // Fill Manifest Modal sheet details
+            document.getElementById('manShipper').innerText = data.shipper;
+            document.getElementById('manReceiver').innerText = data.receiver;
+            document.getElementById('manID').innerText = query;
+            document.getElementById('manService').innerText = data.service;
+            document.getElementById('manWeight').innerText = data.weight;
+            document.getElementById('manDimensions').innerText = data.dimensions;
+            document.getElementById('manBarcode').innerText = data.barcode;
+            document.getElementById('manifestStatusTag').innerText = data.status;
+
+            // Open manifest modal window
+            manifestModal.classList.remove('hidden');
+        }
+
+        function closeManifestModal() {
+            manifestModal.classList.add('hidden');
+        }
+
+        function printManifest() {
+            // Trigger standard print layout on manifest print section
+            const printContents = document.getElementById('manifestPrintArea').innerHTML;
+            const originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = `
+                <div style="background: white; color: black; padding: 40px; font-family: sans-serif;">
+                    ${printContents}
+                </div>
+            `;
+            window.print();
+            document.body.innerHTML = originalContents;
+            // Rebind listeners quickly
+            window.location.reload();
+        }
+
+        function triggerLiveChat() {
+            const data = window.currentTrackedCargo;
+
+            const localizedTitle = (currentLang === 'es') ? 'Conectando con el Agente...' : (currentLang === 'fr') ? 'Connexion à l’Agent...' : (currentLang === 'de') ? 'Verbindung zum Kundenservice...' : (currentLang === 'zh') ? '正在接入专属物流顾问...' : 'Connecting Support Agent...';
+            const localizedMessage = (currentLang === 'es') ? `Abriendo canal prioritario para la carga ${window.currentTrackedCargoID || 'SH-99210'}. Un consultor está revisando su archivo de transporte.` : (currentLang === 'fr') ? `Ouverture de la liaison prioritaire concernant la cargaison ${window.currentTrackedCargoID || 'SH-99210'}. Un consultant étudie votre dossier.` : (currentLang === 'de') ? `Priorisierter Chat-Kanal wird geöffnet für Sendung ${window.currentTrackedCargoID || 'SH-99210'}. Ein Mitarbeiter prüft Ihre Daten.` : (currentLang === 'zh') ? `正在为您接通针对运单号 “${window.currentTrackedCargoID || 'SH-99210'}” 的加急咨询通道，值班顾问正在调取该货物的国际舱单及通关状态文件，请稍候。` : `Opening prioritized chat bridge regarding cargo ${window.currentTrackedCargoID || 'SH-99210'}. A freight consultant is reviewing your custom logistics file.`;
+
+            openStatusModal(localizedTitle, localizedMessage);
+        }
+    </script>
+</body>
+</html>

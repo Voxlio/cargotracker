@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "api/index.js": { "includeFiles": "database.json" }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.js" },
+    { "source": "/admin", "destination": "/api/index.js" }
+  ]
+}

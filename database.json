@@ -1,0 +1,401 @@
+{
+    "SH-99210": {
+        "waybill": "WB-901042-99210",
+        "eta": "Delivered successfully",
+        "location": "Local Delivery Agent Terminal",
+        "status": "Delivered",
+        "badgeClass": "bg-emerald-500/10 text-[#22C55E] border border-emerald-500/30",
+        "step": 4,
+        "shipper": "Lux Logistics SA, Paris (CDG)",
+        "receiver": "TechCorp Industries, New York (JFK)",
+        "service": "Express Air Freight Priority",
+        "weight": "245.5 kg",
+        "dimensions": "120 × 80 × 95 cm",
+        "barcode": "|||| | | ||| || ||| | ||",
+        "tempSensor": "18.2°C (Optimal Room Temp)",
+        "times": [
+            "May 23, 08:30 AM",
+            "May 24, 11:15 AM",
+            "May 25, 02:45 PM",
+            "Pending Transit"
+        ],
+        "timeline": [
+            {
+                "time": "May 28, 2026 - 12:20 AM",
+                "event": "Status changed to: Delivered",
+                "loc": "Local Delivery Agent Terminal",
+                "icon": "fa-circle-check",
+                "desc": "Status manually updated through Staff Operations Console"
+            },
+            {
+                "time": "May 26, 2026 - 10:15 AM",
+                "event": "Arrived at USA Import Hub",
+                "loc": "New York JFK Cargo Terminal",
+                "icon": "fa-plane-arrival",
+                "desc": "Transatlantic flight route SH-401 completed. Routed to custom import docks."
+            },
+            {
+                "time": "May 25, 2026 - 03:30 AM",
+                "event": "In Transit - Flight Departed",
+                "loc": "Paris Charles de Gaulle (CDG)",
+                "icon": "fa-plane-departure",
+                "desc": "Consolidated freight load departed on flight SH-401 eastbound."
+            },
+            {
+                "time": "May 24, 2026 - 01:15 PM",
+                "event": "Sorted & Export Dock cleared",
+                "loc": "Paris CDG Airport Depot",
+                "icon": "fa-clipboard-check",
+                "desc": "Customs declaration filed, export taxes cleared, secured container load approved."
+            },
+            {
+                "time": "May 23, 2026 - 08:30 AM",
+                "event": "Manifest Initiated & Picked Up",
+                "loc": "Shipper Paris Facility Warehouse",
+                "icon": "fa-truck-ramp-box",
+                "desc": "Package picked up by express courier. Weight verified, container sealed."
+            }
+        ]
+    },
+    "SH-44023": {
+        "waybill": "WB-220194-44023",
+        "eta": "Delivered (May 25, 2026)",
+        "location": "New York HQ - Dock B (Signed by A. Carter)",
+        "status": "Delivered",
+        "badgeClass": "bg-emerald-500/10 text-emerald-500 border border-emerald-500/30",
+        "step": 4,
+        "shipper": "Global Auto Parts Corp, Los Angeles (LAX)",
+        "receiver": "Manhattan Assembly Lines, New York",
+        "service": "Overland Road Freight Cold-Chain",
+        "weight": "1,240.0 kg",
+        "dimensions": "240 × 120 × 180 cm",
+        "barcode": "||| ||| | ||| || || |||",
+        "tempSensor": "4.5°C (Refrigerated Controlled)",
+        "times": [
+            "May 21, 09:00 AM",
+            "May 22, 02:00 PM",
+            "May 24, 10:45 PM",
+            "May 25, 01:20 PM"
+        ],
+        "timeline": [
+            {
+                "time": "May 25, 2026 - 01:20 PM",
+                "event": "Cargo Delivered & Completed",
+                "loc": "Manhattan Corporate Assembly Office",
+                "icon": "fa-circle-check",
+                "desc": "Cargo offloaded. Checked out cleanly. Received and signed by operations lead Andrew Carter."
+            },
+            {
+                "time": "May 25, 2026 - 07:45 AM",
+                "event": "Out for Final Mile Delivery",
+                "loc": "New York Terminal Gate 3",
+                "icon": "fa-truck-fast",
+                "desc": "Consolidated load transferred to local delivery courier for dock delivery."
+            },
+            {
+                "time": "May 24, 2026 - 10:45 PM",
+                "event": "Arrived at Regional Distribution Hub",
+                "loc": "New York Jersey Terminals",
+                "icon": "fa-warehouse",
+                "desc": "Cross-dock de-consolidation initiated. Long-haul trailer disconnected safely."
+            },
+            {
+                "time": "May 22, 2026 - 02:00 PM",
+                "event": "Interstate Transit Gate Clearance",
+                "loc": "Chicago Transit Plaza Checkpoint",
+                "icon": "fa-truck",
+                "desc": "Midwest route checkpoint verified. Carrier telemetry reports zero mechanical anomalies."
+            },
+            {
+                "time": "May 21, 2026 - 09:00 AM",
+                "event": "Cargo Picked Up & Sealing Completed",
+                "loc": "Los Angeles Depot Loading Ramp",
+                "icon": "fa-box-open",
+                "desc": "Refrigerated trailer loaded. Barcodes assigned and structural tracking enabled."
+            }
+        ]
+    },
+    "SH-55731": {
+        "waybill": "WB-883011-55731",
+        "eta": "Customs Hold (Delayed)",
+        "location": "Port of Seattle, Customs Clearance Terminal",
+        "status": "Customs Exception",
+        "badgeClass": "bg-rose-500/10 text-rose-500 border border-rose-500/30",
+        "step": 2,
+        "shipper": "SinoExport Manufactures, Shanghai Port",
+        "receiver": "Pacific Distribution Group, Seattle Center",
+        "service": "Ocean Carrier Vessel Consignee",
+        "weight": "14,500 kg",
+        "dimensions": "20ft Premium High-Cube Container",
+        "barcode": "||| | ||| || ||| || ||| ||",
+        "tempSensor": "15.4°C (Optimal Container Temp)",
+        "times": [
+            "May 08, 10:00 AM",
+            "May 25, 04:12 PM",
+            "Pending Release",
+            "Pending Release"
+        ],
+        "timeline": [
+            {
+                "time": "May 26, 2026 - 09:00 AM",
+                "event": "Customs Inspection Hold",
+                "loc": "Port of Seattle Customs Compound",
+                "icon": "fa-circle-exclamation",
+                "desc": "Random customs check initiated. Import duty declaration under inspection. Agent broker has been notified."
+            },
+            {
+                "time": "May 25, 2026 - 04:12 PM",
+                "event": "Cargo Vessel Docked & Discharged",
+                "loc": "Port of Seattle Dock Terminal 18",
+                "icon": "fa-ship",
+                "desc": "Container vessel MSC Oceanica arrived safely. Container discharged and routed to container yard."
+            },
+            {
+                "time": "May 10, 2026 - 11:30 PM",
+                "event": "Vessel Departed Origin Port",
+                "loc": "Shanghai Deepwater Port",
+                "icon": "fa-anchor",
+                "desc": "Ocean freight corridor transit route initiated across trans-pacific line."
+            },
+            {
+                "time": "May 08, 2026 - 10:00 AM",
+                "event": "Manifest Registered & Containerized",
+                "loc": "Shanghai Industrial Zone Depot",
+                "icon": "fa-file-signature",
+                "desc": "Waybill registered. Export packing checks completed and standard security seals applied."
+            }
+        ]
+    },
+    "SH-32947": {
+        "waybill": "WB-157150-SH-32947",
+        "eta": "Delivered successfully",
+        "location": "Destination Receiver Dock",
+        "status": "Delivered",
+        "badgeClass": "bg-emerald-500/10 text-[#22C55E] border border-emerald-500/30",
+        "step": 4,
+        "shipper": "Mazard Logistics, NGN",
+        "receiver": "Andycop, New York",
+        "service": "Express Air Freight Priority",
+        "weight": "20.5KG",
+        "dimensions": "40X40X40CM",
+        "barcode": "||| ||| | || 32947 ||",
+        "tempSensor": "17",
+        "times": [
+            "May 27, 09:00 AM",
+            "Pending Sorting",
+            "Pending Dispatch",
+            "Pending Delivery"
+        ],
+        "timeline": [
+            {
+                "time": "May 28, 2026 - 01:24 AM",
+                "event": "Status updated to: Delivered",
+                "loc": "Destination Receiver Dock",
+                "icon": "fa-circle-check",
+                "desc": "Shipment completed. Handover checked, completed, and signed for successfully by local consignee."
+            },
+            {
+                "time": "May 28, 2026 - 12:50 AM",
+                "event": "Status updated to: In Transit",
+                "loc": "En Route Gateway Hub",
+                "icon": "fa-truck-fast",
+                "desc": "Cleared processing facilities and is actively forwarding across the transportation network node."
+            },
+            {
+                "time": "May 28, 2026 - 12:44 AM",
+                "event": "Status changed to: Delivered",
+                "loc": "Local Delivery Agent Terminal",
+                "icon": "fa-circle-check",
+                "desc": "Status manually updated through Staff Operations Console"
+            },
+            {
+                "time": "May 28, 2026 - 11:00 AM",
+                "event": "Awaiting delivery hub dispatch",
+                "loc": "Target Terminal Hub",
+                "icon": "fa-map-pin",
+                "desc": "Consignment parameters tracked and registered. Transition log approved."
+            },
+            {
+                "time": "May 28, 2026 - 08:30 AM",
+                "event": "Departed facility node on route transit",
+                "loc": "Gateway Sorting Node",
+                "icon": "fa-truck",
+                "desc": "Container manifest dispatched toward target delivery terminal."
+            },
+            {
+                "time": "May 27, 2026 - 02:30 PM",
+                "event": "Freight Sorted & Consolidated",
+                "loc": "Carrier Dispatch Center",
+                "icon": "fa-warehouse",
+                "desc": "Cargo consolidated on linehaul truck loading ramps."
+            },
+            {
+                "time": "May 27, 2026 - 09:00 AM",
+                "event": "Manifest Initiated & Picked Up",
+                "loc": " NGN",
+                "icon": "fa-truck-ramp-box",
+                "desc": "Package collection completed. Waybill tags generated securely."
+            }
+        ]
+    },
+    "SH-20291": {
+        "waybill": "WB-699324-SH-20291",
+        "eta": "Delivered successfully",
+        "location": "Destination Receiver Dock",
+        "status": "Delivered",
+        "badgeClass": "bg-emerald-500/10 text-[#22C55E] border border-emerald-500/30",
+        "step": 4,
+        "shipper": "Mazard, Sweden",
+        "receiver": "Andway, Japan",
+        "service": "Ocean Carrier Vessel Consignee",
+        "weight": "78kg",
+        "dimensions": "50x50CM",
+        "barcode": "||| ||| | || 20291 ||",
+        "tempSensor": "19.6",
+        "times": [
+            "May 27, 09:00 AM",
+            "May 27, 02:30 PM",
+            "May 28, 10:15 AM",
+            "Pending Delivery"
+        ],
+        "timeline": [
+            {
+                "time": "May 28, 2026 - 01:32 AM",
+                "event": "Status updated to: Delivered",
+                "loc": "Destination Receiver Dock",
+                "icon": "fa-circle-check",
+                "desc": "Shipment completed. Handover checked, completed, and signed for successfully by local consignee."
+            },
+            {
+                "time": "May 28, 2026 - 11:00 AM",
+                "event": "Awaiting delivery hub dispatch",
+                "loc": "Target Terminal Hub",
+                "icon": "fa-map-pin",
+                "desc": "Consignment parameters tracked and registered. Transition log approved."
+            },
+            {
+                "time": "May 28, 2026 - 08:30 AM",
+                "event": "Departed facility node on route transit",
+                "loc": "Gateway Sorting Node",
+                "icon": "fa-truck",
+                "desc": "Container manifest dispatched toward target delivery terminal."
+            },
+            {
+                "time": "May 27, 2026 - 02:30 PM",
+                "event": "Freight Sorted & Consolidated",
+                "loc": "Carrier Dispatch Center",
+                "icon": "fa-warehouse",
+                "desc": "Cargo consolidated on linehaul truck loading ramps."
+            },
+            {
+                "time": "May 27, 2026 - 09:00 AM",
+                "event": "Manifest Initiated & Picked Up",
+                "loc": " Sweden",
+                "icon": "fa-truck-ramp-box",
+                "desc": "Package collection completed. Waybill tags generated securely."
+            }
+        ]
+    },
+    "SH-96766": {
+        "waybill": "WB-350630-SH-96766",
+        "eta": "In 4 Business Days",
+        "location": "En Route Gateway Center",
+        "status": "In Transit",
+        "badgeClass": "bg-amber-500/10 text-amber-500 border border-amber-500/30",
+        "step": 3,
+        "shipper": "Mike Inc, London",
+        "receiver": "Fabcorp, Paris",
+        "service": "Express Air Freight Priority",
+        "weight": "13.5kg",
+        "dimensions": "20x40x50",
+        "barcode": "||| ||| | || 96766 ||",
+        "tempSensor": "20",
+        "times": [
+            "May 27, 09:00 AM",
+            "May 27, 02:30 PM",
+            "May 28, 10:15 AM",
+            "Pending Delivery"
+        ],
+        "timeline": [
+            {
+                "time": "May 28, 2026 - 11:00 AM",
+                "event": "Awaiting delivery hub dispatch",
+                "loc": "Target Terminal Hub",
+                "icon": "fa-map-pin",
+                "desc": "Consignment parameters tracked and registered. Transition log approved."
+            },
+            {
+                "time": "May 28, 2026 - 08:30 AM",
+                "event": "Departed facility node on route transit",
+                "loc": "Gateway Sorting Node",
+                "icon": "fa-truck",
+                "desc": "Container manifest dispatched toward target delivery terminal."
+            },
+            {
+                "time": "May 27, 2026 - 02:30 PM",
+                "event": "Freight Sorted & Consolidated",
+                "loc": "Carrier Dispatch Center",
+                "icon": "fa-warehouse",
+                "desc": "Cargo consolidated on linehaul truck loading ramps."
+            },
+            {
+                "time": "May 27, 2026 - 09:00 AM",
+                "event": "Manifest Initiated & Picked Up",
+                "loc": " London",
+                "icon": "fa-truck-ramp-box",
+                "desc": "Package collection completed. Waybill tags generated securely."
+            }
+        ]
+    },
+    "SH-44355": {
+        "waybill": "WB-148845-SH-44355",
+        "eta": "In 4 Business Days",
+        "location": "En Route Gateway Center",
+        "status": "Sorting Depot",
+        "badgeClass": "bg-sky-500/10 text-sky-500 border border-sky-500/30",
+        "step": 1,
+        "shipper": "test, london",
+        "receiver": "test, ny",
+        "service": "Express Air Freight Priority",
+        "weight": "24",
+        "dimensions": "25x25x25",
+        "barcode": "||| ||| | || 44355 ||",
+        "tempSensor": "28",
+        "times": [
+            "May 27, 09:00 AM",
+            "Pending Sorting",
+            "Pending Dispatch",
+            "Pending Delivery"
+        ],
+        "timeline": [
+            {
+                "time": "May 28, 2026 - 11:00 AM",
+                "event": "Awaiting delivery hub dispatch",
+                "loc": "Target Terminal Hub",
+                "icon": "fa-map-pin",
+                "desc": "Consignment parameters tracked and registered. Transition log approved."
+            },
+            {
+                "time": "May 28, 2026 - 08:30 AM",
+                "event": "Departed facility node on route transit",
+                "loc": "Gateway Sorting Node",
+                "icon": "fa-truck",
+                "desc": "Container manifest dispatched toward target delivery terminal."
+            },
+            {
+                "time": "May 27, 2026 - 02:30 PM",
+                "event": "Freight Sorted & Consolidated",
+                "loc": "Carrier Dispatch Center",
+                "icon": "fa-warehouse",
+                "desc": "Cargo consolidated on linehaul truck loading ramps."
+            },
+            {
+                "time": "May 27, 2026 - 09:00 AM",
+                "event": "Manifest Initiated & Picked Up",
+                "loc": " london",
+                "icon": "fa-truck-ramp-box",
+                "desc": "Package collection completed. Waybill tags generated securely."
+            }
+        ]
+    }
+}
