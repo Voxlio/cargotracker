@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CargoTracker offers air, ocean, road and rail freight, customs clearance, warehousing and live shipment tracking.">
     <title>CargoTracker - Transport & Logistics Solutions</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +13,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
     <script>
         tailwind.config = {
             theme: {
@@ -39,6 +40,11 @@
         .hero-overlay {
             background: rgba(15, 23, 42, 0.75);
         }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: none; }
+        }
+        .animate-fadeIn { animation: fadeIn 0.5s ease-out both; }
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -57,6 +63,24 @@
             .no-print {
                 display: none !important;
             }
+            /* Printing the manifest: show only the manifest sheet */
+            body.printing-manifest > *:not(#manifestModal) {
+                display: none !important;
+            }
+            body.printing-manifest #manifestModal {
+                position: static !important;
+                display: block !important;
+                background: #fff !important;
+                padding: 0 !important;
+                backdrop-filter: none !important;
+            }
+            body.printing-manifest #manifestModal > div {
+                max-width: 100% !important;
+                max-height: none !important;
+                overflow: visible !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+            }
         }
     </style>
 </head>
@@ -67,7 +91,6 @@
         <div class="flex items-center space-x-6">
             <span class="flex items-center" data-i18n="topbar.location"><i class="fa-solid fa-map-marker-alt text-primary mr-2"></i> Brooklyn, New York, USA</span>
             <span class="flex items-center"><i class="fa-solid fa-envelope text-primary mr-2"></i> info@cargotracker.org</span>
-        </div>
         </div>
         <div class="flex items-center space-x-4">
             <a href="#" class="hover:text-primary transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
@@ -115,7 +138,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
             <!-- Mobile Navigation Toggle -->
             <button id="mobileMenuBtn" class="lg:hidden text-slate-800 text-2xl focus:outline-none p-2" aria-label="Toggle Menu">
@@ -156,7 +178,7 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <section id="home" class="relative min-h-[85vh] flex items-center justify-start bg-cover bg-center no-print" style="background-image: url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1920&q=80');">
+    <section id="home" class="relative min-h-[85vh] flex items-center justify-start bg-cover bg-center no-print" style="background-image: url('/images/hero-background.jpg');">
         <!-- Overlay background dark slate -->
         <div class="absolute inset-0 hero-overlay"></div>
         
@@ -370,7 +392,7 @@
                 <!-- Air Freight -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="Air Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Air+Freight'">
+                        <img src="/images/air-freight.jpg" alt="Air Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Air+Freight'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -389,7 +411,7 @@
                 <!-- Ocean Freight -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <img src="https://images.unsplash.com/photo-1585713181935-d5f622cc2415?auto=format&fit=crop&w=600&q=80" alt="Ocean Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Ocean+Freight'">
+                        <img src="/images/ocean-freight.jpg" alt="Ocean Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Ocean+Freight'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -408,7 +430,7 @@
                 <!-- Road Freight -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=600&q=80" alt="Road Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Road+Freight'">
+                        <img src="/images/road-freight.jpg" alt="Road Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Road+Freight'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -427,7 +449,7 @@
                 <!-- Train Freight -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <img src="https://images.unsplash.com/photo-1592844002373-a55ecd7af140?auto=format&fit=crop&w=600&q=80" alt="Train Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Train+Freight'">
+                        <img src="/images/train-freight.jpg" alt="Train Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Train+Freight'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -446,7 +468,7 @@
                 <!-- Customs Clearance -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <img src="https://images.unsplash.com/photo-1739877907105-2e578ee67bca?auto=format&fit=crop&w=600&q=80" alt="Customs Clearance" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=Customs+Clearance'">
+                        <img src="/images/customs-clearance.jpg" alt="Customs Clearance" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Customs+Clearance'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -466,7 +488,7 @@
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
                         <!-- High resolution, active warehouse fulfillment imagery -->
-                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Warehouse Solutions" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/800x600?text=Warehouse+Solutions'">
+                        <img src="/images/warehouse-solutions.jpg" alt="Warehouse Solutions" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Warehouse+Solutions'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -492,7 +514,7 @@
                 <!-- Left Column: Custom Delivery worker holding box -->
                 <div class="relative">
                     <div class="relative z-10 rounded-lg overflow-hidden shadow-xl max-w-full lg:max-w-xl mx-auto">
-                        <img src="https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=800&q=80" alt="Quick Transport Solutions" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/800x600?text=Logistics+Delivery'">
+                        <img src="/images/logistics-delivery.jpg" alt="Quick Transport Solutions" class="w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Logistics+Delivery'">
                     </div>
                     <!-- Absolute Decorative Box behind image matching template styling -->
                     <div class="absolute -bottom-6 -right-6 w-full h-full border-8 border-slate-100 rounded-lg -z-0 hidden md:block"></div>
@@ -566,7 +588,7 @@
                 <!-- Right Side: Workers photo grid -->
                 <div class="order-1 lg:order-2">
                     <div class="relative overflow-hidden rounded-lg shadow-xl">
-                        <img src="https://images.unsplash.com/photo-1740914994657-f1cdffdc418e?auto=format&fit=crop&w=800&q=80" alt="Trusted Shipment Workers" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/800x600?text=Trusted+Warehouse'">
+                        <img src="/images/trusted-shipment-workers.jpg" alt="Trusted Shipment Workers" class="w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Trusted+Warehouse'">
                     </div>
                 </div>
             </div>
@@ -603,7 +625,7 @@
                         <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-users"></i>
                         </div>
-                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="10447">10,447+</span>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="10447" data-suffix="+">10,447+</span>
                         <span class="text-sm font-semibold text-rose-100 uppercase tracking-wider" data-i18n="stats.happy">Happy Clients</span>
                     </div>
 
@@ -612,7 +634,7 @@
                         <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-star"></i>
                         </div>
-                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="3234">3,234</span>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="3234" data-suffix="+">3,234+</span>
                         <span class="text-sm font-semibold text-emerald-100 uppercase tracking-wider" data-i18n="stats.reviews">Customer Reviews</span>
                     </div>
 
@@ -621,7 +643,7 @@
                         <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-ship"></i>
                         </div>
-                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="20266">20,266</span>
+                        <span class="text-3xl font-heading font-extrabold mb-2 count-up" data-target="20266" data-suffix="+">20,266+</span>
                         <span class="text-sm font-semibold text-sky-100 uppercase tracking-wider" data-i18n="stats.shipments">Complete Shipments</span>
                     </div>
 
@@ -651,6 +673,11 @@
                 </div>
                 
                 <form id="quoteForm" onsubmit="handleQuoteSubmit(event)" class="space-y-6">
+                    <!-- Spam trap: hidden from people, bots fill it in -->
+                    <div style="position:absolute;left:-9999px;" aria-hidden="true">
+                        <label for="quoteWebsite">Leave this field empty</label>
+                        <input type="text" id="quoteWebsite" name="website" tabindex="-1" autocomplete="off">
+                    </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label for="quoteName" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2" data-i18n="quote.lbl_name">Your Name</label>
@@ -680,7 +707,7 @@
                     </div>
 
                     <div>
-                        <label for="quoteMessage" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2" data-i18n="quote.lbl_note">Special Note</label>
+                        <label for="quoteMessage" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2" data-i18n="quote.lbl_note">Message</label>
                         <textarea id="quoteMessage" rows="4" data-i18n-placeholder="quote.ph_note" placeholder="Describe your logistics needs..." class="w-full bg-white border border-slate-200 rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"></textarea>
                     </div>
 
@@ -704,7 +731,7 @@
             </div>
 
             <!-- Interactive testimonial cards slider space -->
-            <div class="relative max-w-4xl mx-auto">
+            <div class="relative max-w-4xl mx-auto overflow-hidden">
                 <div id="testimonialContainer" class="flex transition-transform duration-500 ease-in-out">
                     <!-- Testimonial 1 -->
                     <div class="w-full flex-shrink-0 px-4">
@@ -716,7 +743,7 @@
                                 "Cargotracker has completely transformed our global distribution model. Their real-time telemetry tracking and automated customs brokerage saved us over 40 hours of administrative overhead in our first month. The transit timelines are incredibly precise."
                             </p>
                             <div class="flex items-center space-x-4">
-                                <img src="https://images.unsplash.com/photo-1656338997878-279d71d48f6e?auto=format&fit=crop&w=150&q=80" alt="Client 1" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+1'">
+                                <img src="/images/client1.jpg" alt="Client 1" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.onerror=null;this.src='https://placehold.co/150x150?text=Client+1'">
                                 <div>
                                     <h4 class="text-base font-heading font-bold text-secondary">Daniel Carter</h4>
                                     <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold" data-i18n="testimonial.client1_role">Logistics Manager, TechCorp</p>
@@ -734,7 +761,7 @@
                                 "Operating a complex, nationwide retail supply chain requires flawless timing. Cargotracker delivers consistent reliability across our road and rail operations. Their instant rate estimator makes logistics planning painless."
                             </p>
                             <div class="flex items-center space-x-4">
-                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Client 2" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+2'">
+                                <img src="/images/client2.jpg" alt="Client 2" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.onerror=null;this.src='https://placehold.co/150x150?text=Client+2'">
                                 <div>
                                     <h4 class="text-base font-heading font-bold text-secondary">Sophia Bennett</h4>
                                     <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold" data-i18n="testimonial.client2_role">Supply Chain Dir, PrimeGoods</p>
@@ -752,7 +779,7 @@
                                 "During a critical sea-freight customs hold, Cargotracker's dedicated support agents intervened immediately to update declaration files. Their proactive service saved us thousands in potential port delays."
                             </p>
                             <div class="flex items-center space-x-4">
-                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Client 3" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.src='https://placehold.co/150x150?text=Client+3'">
+                                <img src="/images/client3.jpg" alt="Client 3" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.onerror=null;this.src='https://placehold.co/150x150?text=Client+3'">
                                 <div>
                                     <h4 class="text-base font-heading font-bold text-secondary">Ethan Vance</h4>
                                     <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold" data-i18n="testimonial.client3_role">COO, GlobaRetail</p>
@@ -1518,7 +1545,7 @@
                 "tracker.lbl_dest": "收货方 / 目的地",
                 "tracker.lbl_weight": "货物毛重",
                 "tracker.lbl_dimensions": "尺寸 (长×宽×高)",
-                "tracker.lbl_sensor": "集装箱温度 telemetry",
+                "tracker.lbl_sensor": "集装箱温度遥测",
                 "tracker.barcode_lbl": "安全验证数字条形码",
                 "tracker.btn_manifest": "海运/空运舱单证明",
                 "tracker.btn_support": "在线客服支持",
@@ -1763,17 +1790,18 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const counter = entry.target;
-                    const target = parseInt(counter.getAttribute('data-target'));
+                    const target = parseInt(counter.getAttribute('data-target'), 10);
+                    const suffix = counter.getAttribute('data-suffix') || '';
                     let count = 0;
                     const speed = target / 80; // duration control
 
                     const updateCount = () => {
                         if (count < target) {
                             count = Math.min(target, Math.ceil(count + speed));
-                            counter.innerText = count.toLocaleString();
+                            counter.innerText = count.toLocaleString('en-US') + suffix;
                             setTimeout(updateCount, 15);
                         } else {
-                            counter.innerText = target.toLocaleString();
+                            counter.innerText = target.toLocaleString('en-US') + suffix;
                         }
                     };
 
@@ -1821,30 +1849,103 @@
             }, 300);
         }
 
-        // Form handlers
-        function handleQuoteSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('quoteName').value;
-            const email = document.getElementById('quoteEmail').value;
-            const service = document.getElementById('quoteService').value;
-
-            const localizedTitle = (currentLang === 'es') ? '¡Solicitud de Cotización Recibida!' : (currentLang === 'fr') ? 'Demande de Devis Reçue !' : (currentLang === 'de') ? 'Angebotsanfrage erhalten!' : (currentLang === 'zh') ? '报价申请已提交！' : 'Quote Request Received!';
-            const localizedMessage = (currentLang === 'es') ? `Gracias ${name}. Nuestro equipo logístico recibió su consulta de "${service}". Responderemos pronto a ${email}.` : (currentLang === 'fr') ? `Merci ${name}. Notre équipe a reçu votre demande de service "${service}". Nous vous répondrons à ${email}.` : (currentLang === 'de') ? `Danke ${name}. Unser Logistikteam hat Ihre Anfrage für "${service}" erhalten. Wir antworten an ${email}.` : (currentLang === 'zh') ? `非常感谢 ${name}。我们的货运专员已收到您关于“${service}”服务的咨询，稍后会将方案发送至您的邮箱：${email}。` : `Thank you ${name}. Our logistics expert team has received your inquiry for "${service}" service. We will review the parameters and email you back at ${email} shortly.`;
-
-            openStatusModal(localizedTitle, localizedMessage);
-            document.getElementById('quoteForm').reset();
+        // Pick the text for the current language (falls back to English)
+        function pick(en, es, fr, de, zh) {
+            return ({ en: en, es: es, fr: fr, de: de, zh: zh })[currentLang] || en;
         }
 
-        // Newsletter Handler
-        function handleNewsletterSubmit(e) {
+        async function postJSON(url, payload) {
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            let data = {};
+            try { data = await res.json(); } catch (err) { /* empty body */ }
+            return { ok: res.ok, status: res.status, data: data };
+        }
+
+        function showSendError(result) {
+            const title = pick('Something went wrong', 'Algo salió mal', 'Une erreur est survenue', 'Etwas ist schiefgelaufen', '出错了');
+            let msg;
+            if (result && result.status === 429) {
+                msg = pick('Too many requests. Please try again later.', 'Demasiadas solicitudes. Inténtelo más tarde.', 'Trop de demandes. Veuillez réessayer plus tard.', 'Zu viele Anfragen. Bitte versuchen Sie es später erneut.', '请求过于频繁，请稍后再试。');
+            } else if (result && result.data && result.data.error) {
+                msg = result.data.error;
+            } else {
+                msg = pick('We could not send your request. Please check your connection and try again.', 'No pudimos enviar su solicitud. Revise su conexión e inténtelo de nuevo.', 'Impossible d\'envoyer votre demande. Vérifiez votre connexion et réessayez.', 'Ihre Anfrage konnte nicht gesendet werden. Bitte prüfen Sie Ihre Verbindung.', '无法发送您的请求，请检查网络后重试。');
+            }
+            openStatusModal(title, msg, false);
+        }
+
+        // Quote form: saves the request on the server so staff can read it in /admin
+        async function handleQuoteSubmit(e) {
             e.preventDefault();
-            const email = document.getElementById('newsEmail').value;
+            const form = document.getElementById('quoteForm');
+            const btn = form.querySelector('button[type="submit"]');
+            const name = document.getElementById('quoteName').value.trim();
+            const email = document.getElementById('quoteEmail').value.trim();
+            const service = document.getElementById('quoteService').value;
 
-            const localizedTitle = (currentLang === 'es') ? '¡Suscripción Exitosa!' : (currentLang === 'fr') ? 'Inscription Réussie !' : (currentLang === 'de') ? 'Erfolgreich abonniert!' : (currentLang === 'zh') ? '订阅成功！' : 'Subscribed Successfully!';
-            const localizedMessage = (currentLang === 'es') ? `Se ha suscrito al boletín de CargoTracker. Recibirá novedades periódicas en ${email}.` : (currentLang === 'fr') ? `Inscription réussie à la newsletter de CargoTracker. Les actualités seront envoyées à ${email}.` : (currentLang === 'de') ? `Erfolgreich abonniert. Transport-Updates werden regelmäßig an ${email} gesendet.` : (currentLang === 'zh') ? `您已成功订阅 CargoTracker 国际货运周刊，最新行业动态及政策调整将发送至：${email}。` : `You have successfully subscribed to the CargoTracker newsletter. Global cargo insights and transport updates will be delivered periodically to ${email}.`;
+            btn.disabled = true;
+            btn.classList.add('opacity-60', 'cursor-not-allowed');
+            try {
+                const result = await postJSON('/api/quotes', {
+                    name: name,
+                    email: email,
+                    phone: document.getElementById('quotePhone').value.trim(),
+                    service: service,
+                    message: document.getElementById('quoteMessage').value,
+                    website: document.getElementById('quoteWebsite').value
+                });
 
-            openStatusModal(localizedTitle, localizedMessage);
-            document.getElementById('newsEmail').value = "";
+                if (result.ok) {
+                    const localizedTitle = pick('Quote Request Received!', '¡Solicitud de Cotización Recibida!', 'Demande de Devis Reçue !', 'Angebotsanfrage erhalten!', '报价申请已提交！');
+                    const localizedMessage = (currentLang === 'es') ? `Gracias ${name}. Nuestro equipo logístico recibió su consulta de "${service}". Responderemos pronto a ${email}.` : (currentLang === 'fr') ? `Merci ${name}. Notre équipe a reçu votre demande de service "${service}". Nous vous répondrons à ${email}.` : (currentLang === 'de') ? `Danke ${name}. Unser Logistikteam hat Ihre Anfrage für "${service}" erhalten. Wir antworten an ${email}.` : (currentLang === 'zh') ? `非常感谢 ${name}。我们的货运专员已收到您关于“${service}”服务的咨询，稍后会将方案发送至您的邮箱：${email}。` : `Thank you ${name}. Our logistics expert team has received your inquiry for "${service}" service. We will review the parameters and email you back at ${email} shortly.`;
+                    openStatusModal(localizedTitle, localizedMessage);
+                    form.reset();
+                } else {
+                    showSendError(result);
+                }
+            } catch (err) {
+                showSendError(null);
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('opacity-60', 'cursor-not-allowed');
+            }
+        }
+
+        // Newsletter signup: saves the email on the server
+        async function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('newsEmail');
+            const email = input.value.trim();
+            const btn = e.target.querySelector('button[type="submit"]');
+
+            btn.disabled = true;
+            btn.classList.add('opacity-60', 'cursor-not-allowed');
+            try {
+                const result = await postJSON('/api/newsletter', { email: email });
+
+                if (result.ok) {
+                    const localizedTitle = pick('Subscribed Successfully!', '¡Suscripción Exitosa!', 'Inscription Réussie !', 'Erfolgreich abonniert!', '订阅成功！');
+                    const localizedMessage = (currentLang === 'es') ? `Se ha suscrito al boletín de CargoTracker. Recibirá novedades periódicas en ${email}.` : (currentLang === 'fr') ? `Inscription réussie à la newsletter de CargoTracker. Les actualités seront envoyées à ${email}.` : (currentLang === 'de') ? `Erfolgreich abonniert. Transport-Updates werden regelmäßig an ${email} gesendet.` : (currentLang === 'zh') ? `您已成功订阅 CargoTracker 国际货运周刊，最新行业动态及政策调整将发送至：${email}。` : `You have successfully subscribed to the CargoTracker newsletter. Global cargo insights and transport updates will be delivered periodically to ${email}.`;
+                    openStatusModal(localizedTitle, localizedMessage);
+                    input.value = '';
+                } else {
+                    showSendError(result);
+                }
+            } catch (err) {
+                showSendError(null);
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('opacity-60', 'cursor-not-allowed');
+            }
+        }
+
+        // Escape text from the API before inserting it as HTML
+        function esc(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
         }
 
         // Live API call tracking database resolver
@@ -1854,12 +1955,15 @@
             const outputPanel = document.getElementById('trackingOutputPanel');
 
             let result = null;
+            let rateLimited = false;
 
             try {
                 // Request shipment metadata from the external live Node.js Express server
-                const response = await fetch(`/api/shipments/${query}`);
+                const response = await fetch('/api/shipments/' + encodeURIComponent(query));
                 if (response.ok) {
                     result = await response.json();
+                } else if (response.status === 429) {
+                    rateLimited = true;
                 } else {
                     console.warn(`Live server returned non-OK status code: ${response.status}`);
                 }
@@ -1867,7 +1971,14 @@
                 console.warn('API database connection failed:', err);
             }
 
-            // If the shipment is not found on your Node.js backend server, cleanly raise an unregistered alert
+            if (rateLimited) {
+                const rlTitle = (currentLang === 'es') ? 'Demasiadas búsquedas' : (currentLang === 'fr') ? 'Trop de recherches' : (currentLang === 'de') ? 'Zu viele Anfragen' : (currentLang === 'zh') ? '查询过于频繁' : 'Too many searches';
+                const rlMsg = (currentLang === 'es') ? 'Espere un minuto e inténtelo de nuevo.' : (currentLang === 'fr') ? 'Veuillez patienter une minute puis réessayer.' : (currentLang === 'de') ? 'Bitte warten Sie eine Minute und versuchen Sie es erneut.' : (currentLang === 'zh') ? '请稍等一分钟后再试。' : 'Please wait a minute and try again.';
+                openStatusModal(rlTitle, rlMsg, false);
+                return;
+            }
+
+            // If the shipment is not found on the backend, raise an unregistered alert
             if (!result) {
                 outputPanel.classList.add('hidden');
                 
@@ -1893,7 +2004,7 @@
             document.getElementById('trackReceiver').innerText = result.receiver;
             document.getElementById('trackWeight').innerText = result.weight;
             document.getElementById('trackDimensions').innerText = result.dimensions;
-            document.getElementById('trackSensor').innerHTML = `<i class="fa-solid fa-temperature-three-quarters animate-pulse"></i> ${result.tempSensor}`;
+            document.getElementById('trackSensor').innerHTML = `<i class="fa-solid fa-temperature-three-quarters animate-pulse"></i> ${esc(result.tempSensor)}`;
             document.getElementById('trackBarcodeGraphic').innerText = result.barcode;
 
             const badge = document.getElementById('trackStatusBadge');
@@ -1904,7 +2015,7 @@
             for (let i = 1; i <= 4; i++) {
                 const circle = document.getElementById(`step${i}Circle`);
                 const timeLabel = document.getElementById(`step${i}Time`);
-                timeLabel.innerText = result.times[i-1];
+                timeLabel.innerText = (result.times || [])[i-1] || '';
 
                 if (i <= result.step) {
                     // Completed step style matching theme coral red
@@ -1928,7 +2039,7 @@
             const timelineContainer = document.getElementById('timelineLedgerContainer');
             timelineContainer.innerHTML = ''; // Clear previous
 
-            result.timeline.forEach((event, idx) => {
+            (result.timeline || []).forEach((event, idx) => {
                 const isActive = idx === 0;
                 const itemHTML = `
                     <div class="relative pl-6 animate-fadeIn">
@@ -1940,13 +2051,13 @@
                         <!-- Event info body card -->
                         <div class="bg-slate-950/40 border ${isActive ? 'border-primary/30 bg-primary/5' : 'border-slate-800/60'} p-4 rounded-xl">
                             <div class="flex flex-wrap justify-between items-center gap-2 mb-2">
-                                <span class="text-xs font-bold text-slate-400"><i class="fa-solid fa-calendar-day mr-1"></i> ${event.time}</span>
-                                <span class="bg-slate-900 text-slate-300 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-slate-800">${event.loc}</span>
+                                <span class="text-xs font-bold text-slate-400"><i class="fa-solid fa-calendar-day mr-1"></i> ${esc(event.time)}</span>
+                                <span class="bg-slate-900 text-slate-300 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-slate-800">${esc(event.loc)}</span>
                             </div>
                             <h5 class="font-heading font-extrabold text-sm text-white flex items-center gap-2">
-                                <i class="fa-solid ${event.icon} text-xs text-primary"></i> ${event.event}
+                                <i class="fa-solid ${esc(event.icon)} text-xs text-primary"></i> ${esc(event.event)}
                             </h5>
-                            <p class="text-xs text-slate-400 mt-2 leading-relaxed">${event.desc}</p>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed">${esc(event.desc)}</p>
                         </div>
                     </div>
                 `;
@@ -1993,19 +2104,13 @@
         }
 
         function printManifest() {
-            // Trigger standard print layout on manifest print section
-            const printContents = document.getElementById('manifestPrintArea').innerHTML;
-            const originalContents = document.body.innerHTML;
-
-            document.body.innerHTML = `
-                <div style="background: white; color: black; padding: 40px; font-family: sans-serif;">
-                    ${printContents}
-                </div>
-            `;
+            document.body.classList.add('printing-manifest');
+            const cleanup = () => {
+                document.body.classList.remove('printing-manifest');
+                window.removeEventListener('afterprint', cleanup);
+            };
+            window.addEventListener('afterprint', cleanup);
             window.print();
-            document.body.innerHTML = originalContents;
-            // Rebind listeners quickly
-            window.location.reload();
         }
 
         function triggerLiveChat() {

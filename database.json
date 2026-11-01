@@ -397,5 +397,35 @@
                 "desc": "Package collection completed. Waybill tags generated securely."
             }
         ]
+    },
+    "SH-69175": {
+        "waybill": "WB-756105-SH-69175",
+        "eta": "ETA: Nov 01, 08:56 AM",
+        "location": "Sorting Hub Depot",
+        "status": "Sorting Depot",
+        "badgeClass": "bg-sky-500/10 text-sky-500 border border-sky-500/30",
+        "step": 1,
+        "shipper": "Mazard, Belguim Testing",
+        "receiver": "Techcorp, NY",
+        "service": "Express Air Freight Priority",
+        "weight": "24kg",
+        "dimensions": "353x24x5",
+        "barcode": "||| ||| | || 69175 ||",
+        "tempSensor": "10",
+        "times": [
+            "Nov 01, 08:56 AM",
+            "Pending Sorting",
+            "Pending Dispatch",
+            "Pending Delivery"
+        ],
+        "timeline": [
+            {
+                "time": "Nov 01, 2026 - 08:56 AM",
+                "event": "Manifest Initiated & Picked Up",
+                "loc": "Belguim Testing",
+                "icon": "fa-truck-ramp-box",
+                "desc": "Package collection completed. Waybill tags generated securely."
+            }
+        ]
     }
 }
