@@ -45,6 +45,20 @@
             to { opacity: 1; transform: none; }
         }
         .animate-fadeIn { animation: fadeIn 0.5s ease-out both; }
+        .topbar { padding-left: max(1rem, calc((100% - 90rem) / 2 + 1rem)); padding-right: max(1rem, calc((100% - 90rem) / 2 + 1rem)); }
+        @media (min-width: 1024px) { .topbar { padding-left: max(2rem, calc((100% - 90rem) / 2 + 2rem)); padding-right: max(2rem, calc((100% - 90rem) / 2 + 2rem)); } }
+        h1, h2, h3, h4, h5, p { overflow-wrap: break-word; hyphens: auto; }
+        /* Anchor links land below the sticky nav */
+        section[id] { scroll-margin-top: 5rem; }
+        /* Never allow sideways scrolling on small screens */
+        html, body { max-width: 100%; }
+        body { overflow-x: clip; }
+        /* Bigger touch area for the slider dots without changing how they look */
+        .slide-dot { position: relative; }
+        .slide-dot::before { content: ''; position: absolute; inset: -8px; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+        }
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -87,7 +101,7 @@
 <body class="font-sans text-slate-600 bg-white selection:bg-primary selection:text-white">
 
     <!-- TOP HEADER / PHONE STRIP -->
-    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 lg:px-8 hidden md:flex justify-between items-center border-b border-slate-800 no-print">
+    <div class="bg-slate-900 text-slate-300 text-xs py-2 topbar hidden md:flex justify-between items-center border-b border-slate-800 no-print">
         <div class="flex items-center space-x-6">
             <span class="flex items-center" data-i18n="topbar.location"><i class="fa-solid fa-map-marker-alt text-primary mr-2"></i> Brooklyn, New York, USA</span>
             <span class="flex items-center"><i class="fa-solid fa-envelope text-primary mr-2"></i> info@cargotracker.org</span>
@@ -102,14 +116,14 @@
 
     <!-- MAIN STICKY NAVIGATION -->
     <nav class="sticky top-0 z-50 bg-white shadow-md transition-all duration-300 no-print">
-        <div class="max-w-7xl mx-auto flex items-center justify-between pr-4 lg:pr-8">
+        <div class="max-w-7xl 2xl:max-w-[90rem] mx-auto flex items-center justify-between gap-2 pr-3 sm:pr-4 lg:pr-8">
             <!-- Brand Logo with Red Box Background -->
-            <a href="#" class="bg-primary text-white font-heading font-extrabold text-2xl lg:text-3xl px-6 lg:px-10 py-5 flex items-center tracking-wider hover:opacity-95 transition-opacity">
+            <a href="#" class="bg-primary text-white font-heading font-extrabold text-xl sm:text-2xl xl:text-3xl px-4 sm:px-6 xl:px-10 py-4 sm:py-5 flex items-center tracking-wider hover:opacity-95 transition-opacity whitespace-nowrap">
                 <i class="fa-solid fa-box-open mr-2 text-xl lg:text-2xl"></i> CargoTracker
             </a>
 
             <!-- Desktop Links (Removed Pricing & Team) -->
-            <div class="hidden lg:flex items-center space-x-8 font-heading font-semibold text-sm text-slate-800 tracking-wide uppercase">
+            <div class="hidden lg:flex items-center space-x-4 xl:space-x-8 font-heading font-semibold text-xs xl:text-sm text-slate-800 tracking-wide uppercase">
                 <a href="#home" class="text-primary hover:text-primary transition-colors" data-i18n="nav.home">Home</a>
                 <a href="#tracker" class="hover:text-primary transition-colors" data-i18n="nav.track">Track</a>
                 <a href="#about" class="hover:text-primary transition-colors" data-i18n="nav.about">About</a>
@@ -120,11 +134,11 @@
             </div>
 
                 <!-- Desktop Language Selector Dropdown -->
-                <div class="relative inline-block text-left">
+                <div class="relative inline-block text-left ml-auto lg:ml-0">
                     <div>
                         <button type="button" id="langDropdownBtn" class="inline-flex justify-center items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold font-heading uppercase text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none transition-all">
                             <i class="fa-solid fa-globe text-primary text-sm"></i>
-                            <span id="currentLangLabel">English</span>
+                            <span id="currentLangLabel" class="hidden sm:inline">English</span>
                             <i class="fa-solid fa-chevron-down text-[9px] text-slate-400"></i>
                         </button>
                     </div>
@@ -140,7 +154,7 @@
                 </div>
 
             <!-- Mobile Navigation Toggle -->
-            <button id="mobileMenuBtn" class="lg:hidden text-slate-800 text-2xl focus:outline-none p-2" aria-label="Toggle Menu">
+            <button id="mobileMenuBtn" class="lg:hidden text-slate-800 text-2xl focus:outline-none p-2 w-11 h-11 flex items-center justify-center" aria-label="Toggle Menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
@@ -182,14 +196,14 @@
         <!-- Overlay background dark slate -->
         <div class="absolute inset-0 hero-overlay"></div>
         
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 text-left w-full">
+        <div class="relative z-10 max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 text-left w-full">
             <div class="max-w-3xl">
                 <!-- Subtitle -->
                 <p class="text-primary font-heading font-bold text-sm sm:text-base tracking-widest uppercase mb-4 animate-bounce" data-i18n="hero.subtitle">
                     Transport & Logistics Solution
                 </p>
                 <!-- Title matching layout -->
-                <h1 class="text-white font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-tight mb-6" data-i18n="hero.title">
+                <h1 class="text-white font-heading font-extrabold text-3xl min-[400px]:text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-tight mb-6" data-i18n="hero.title">
                     #1 Place For Your <span class="text-primary">Cargo</span> Solutions
                 </h1>
                 <!-- Sub-description -->
@@ -211,8 +225,8 @@
 
     <!-- LIVE SHIPMENT TRACKING HUB -->
     <section id="tracker" class="py-16 bg-slate-950 text-white border-t border-b border-slate-900 scroll-mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+        <div class="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-8 lg:p-10 shadow-2xl relative overflow-hidden">
                 
                 <!-- Background ambient design flare -->
                 <div class="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
@@ -248,22 +262,22 @@
                 <div id="trackingOutputPanel" class="hidden relative z-10 transition-all duration-500 animate-fadeIn">
                     
                     <!-- Top Status Strip -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                         <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60">
                             <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block" data-i18n="tracker.col_waybill">Active Waybill</span>
-                            <p id="trackWaybillID" class="text-lg font-mono font-bold text-white mt-1">-</p>
+                            <p id="trackWaybillID" class="text-base sm:text-lg font-mono font-bold text-white mt-1 break-words">-</p>
                         </div>
                         <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60">
                             <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block" data-i18n="tracker.col_service">Service Level</span>
-                            <p id="trackService" class="text-lg font-heading font-semibold text-sky-400 mt-1">-</p>
+                            <p id="trackService" class="text-base sm:text-lg font-heading font-semibold text-sky-400 mt-1 break-words">-</p>
                         </div>
                         <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60 font-semibold">
                             <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block" data-i18n="tracker.col_checkpoint">Latest Checkpoint</span>
-                            <p id="trackLoc" class="text-lg text-slate-100 truncate mt-1">-</p>
+                            <p id="trackLoc" class="text-base sm:text-lg text-slate-100 mt-1 break-words">-</p>
                         </div>
                         <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/60">
                             <span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest block" data-i18n="tracker.col_delivery">Delivery Target</span>
-                            <p id="trackETA" class="text-lg font-heading font-bold text-primary mt-1">-</p>
+                            <p id="trackETA" class="text-base sm:text-lg font-heading font-bold text-primary mt-1 break-words">-</p>
                         </div>
                     </div>
 
@@ -323,11 +337,11 @@
                             <div class="space-y-4 text-sm">
                                 <div class="flex justify-between py-1 border-b border-slate-900">
                                     <span class="text-slate-500" data-i18n="tracker.lbl_origin">Shipper / Origin</span>
-                                    <span id="trackShipper" class="text-slate-200 font-semibold text-right max-w-[180px] truncate block">-</span>
+                                    <span id="trackShipper" class="text-slate-200 font-semibold text-right max-w-[60%] sm:max-w-[360px] lg:max-w-[180px] xl:max-w-[240px] break-words sm:truncate block">-</span>
                                 </div>
                                 <div class="flex justify-between py-1 border-b border-slate-900">
                                     <span class="text-slate-500" data-i18n="tracker.lbl_dest">Consignee / Destination</span>
-                                    <span id="trackReceiver" class="text-slate-200 font-semibold text-right max-w-[180px] truncate block">-</span>
+                                    <span id="trackReceiver" class="text-slate-200 font-semibold text-right max-w-[60%] sm:max-w-[360px] lg:max-w-[180px] xl:max-w-[240px] break-words sm:truncate block">-</span>
                                 </div>
                                 <div class="flex justify-between py-1 border-b border-slate-900">
                                     <span class="text-slate-500" data-i18n="tracker.lbl_weight">Gross Payload Weight</span>
@@ -347,12 +361,12 @@
 
                             <!-- Styled Vector Barcode representation -->
                             <div class="bg-white text-slate-950 p-4 rounded-xl text-center shadow-inner mt-4">
-                                <div id="trackBarcodeGraphic" class="font-mono text-2xl tracking-[0.25em] font-light select-none select-all">|||||| || | || |||| | | |||</div>
+                                <div id="trackBarcodeGraphic" class="font-mono text-base min-[420px]:text-lg sm:text-2xl tracking-[0.05em] min-[420px]:tracking-[0.12em] sm:tracking-[0.25em] font-light select-none select-all break-all">|||||| || | || |||| | | |||</div>
                                 <div class="text-[10px] text-slate-500 mt-2 font-mono tracking-wider uppercase font-semibold" data-i18n="tracker.barcode_lbl">Security Verification Barcode</div>
                             </div>
 
                             <!-- Action utilities -->
-                            <div class="pt-2 grid grid-cols-2 gap-3">
+                            <div class="pt-2 grid grid-cols-1 min-[420px]:grid-cols-2 gap-3">
                                 <button onclick="triggerPODModal()" class="py-2.5 px-4 bg-slate-800 text-white hover:bg-slate-700 text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center justify-center gap-1.5 shadow">
                                     <i class="fa-solid fa-file-invoice-dollar text-primary"></i> <span data-i18n="tracker.btn_manifest">Manifest Invoice</span>
                                 </button>
@@ -379,7 +393,7 @@
 
     <!-- EXPLORE SERVICES SECTION -->
     <section id="services" class="py-20 lg:py-28 bg-lightBg no-print">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header Text -->
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2" data-i18n="services.subtitle">Our Services</p>
@@ -392,7 +406,7 @@
                 <!-- Air Freight -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <img src="/images/air-freight.jpg" alt="Air Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Air+Freight'">
+                        <img loading="lazy" decoding="async" src="/images/air-freight.jpg" alt="Air Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Air+Freight'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -411,7 +425,7 @@
                 <!-- Ocean Freight -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <img src="/images/ocean-freight.jpg" alt="Ocean Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Ocean+Freight'">
+                        <img loading="lazy" decoding="async" src="/images/ocean-freight.jpg" alt="Ocean Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Ocean+Freight'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -430,7 +444,7 @@
                 <!-- Road Freight -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <img src="/images/road-freight.jpg" alt="Road Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Road+Freight'">
+                        <img loading="lazy" decoding="async" src="/images/road-freight.jpg" alt="Road Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Road+Freight'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -449,7 +463,7 @@
                 <!-- Train Freight -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <img src="/images/train-freight.jpg" alt="Train Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Train+Freight'">
+                        <img loading="lazy" decoding="async" src="/images/train-freight.jpg" alt="Train Freight" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Train+Freight'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -468,7 +482,7 @@
                 <!-- Customs Clearance -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
-                        <img src="/images/customs-clearance.jpg" alt="Customs Clearance" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Customs+Clearance'">
+                        <img loading="lazy" decoding="async" src="/images/customs-clearance.jpg" alt="Customs Clearance" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Customs+Clearance'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -488,7 +502,7 @@
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
                     <div class="relative overflow-hidden h-52">
                         <!-- High resolution, active warehouse fulfillment imagery -->
-                        <img src="/images/warehouse-solutions.jpg" alt="Warehouse Solutions" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Warehouse+Solutions'">
+                        <img loading="lazy" decoding="async" src="/images/warehouse-solutions.jpg" alt="Warehouse Solutions" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Warehouse+Solutions'">
                         <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -509,12 +523,12 @@
 
     <!-- TWO-COLUMN ABOUT & TRUSTED LOGISTICS -->
     <section id="about" class="py-20 lg:py-28 bg-white no-print">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Left Column: Custom Delivery worker holding box -->
                 <div class="relative">
                     <div class="relative z-10 rounded-lg overflow-hidden shadow-xl max-w-full lg:max-w-xl mx-auto">
-                        <img src="/images/logistics-delivery.jpg" alt="Quick Transport Solutions" class="w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Logistics+Delivery'">
+                        <img loading="lazy" decoding="async" src="/images/logistics-delivery.jpg" alt="Quick Transport Solutions" class="w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Logistics+Delivery'">
                     </div>
                     <!-- Absolute Decorative Box behind image matching template styling -->
                     <div class="absolute -bottom-6 -right-6 w-full h-full border-8 border-slate-100 rounded-lg -z-0 hidden md:block"></div>
@@ -562,7 +576,7 @@
                 <!-- Left Side: Text and Trust details -->
                 <div class="order-2 lg:order-1">
                     <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2" data-i18n="about.feat_subtitle">Our Features</p>
-                    <h3 class="text-secondary font-heading font-extrabold text-3xl mb-6" data-i18n="about.feat_title">We Are Trusted Cargo Company Since 1990</h3>
+                    <h3 class="text-secondary font-heading font-extrabold text-2xl sm:text-3xl mb-6" data-i18n="about.feat_title">We Are Trusted Cargo Company Since 1990</h3>
                     
                     <div class="flex items-start space-x-4 mb-6">
                         <div class="text-primary text-xl mt-1 col-span-1 shrink-0">
@@ -588,7 +602,7 @@
                 <!-- Right Side: Workers photo grid -->
                 <div class="order-1 lg:order-2">
                     <div class="relative overflow-hidden rounded-lg shadow-xl">
-                        <img src="/images/trusted-shipment-workers.jpg" alt="Trusted Shipment Workers" class="w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Trusted+Warehouse'">
+                        <img loading="lazy" decoding="async" src="/images/trusted-shipment-workers.jpg" alt="Trusted Shipment Workers" class="w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Trusted+Warehouse'">
                     </div>
                 </div>
             </div>
@@ -597,7 +611,7 @@
 
     <!-- STATS / FACTS SECTION -->
     <section class="py-20 lg:py-24 bg-lightBg border-t border-slate-100 no-print">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Left text side -->
                 <div>
@@ -665,7 +679,7 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <!-- Centered Quote Form Panel -->
-            <div class="bg-slate-50 p-8 sm:p-10 rounded-xl shadow-lg border border-slate-100">
+            <div class="bg-slate-50 p-5 sm:p-8 lg:p-10 rounded-xl shadow-lg border border-slate-100">
                 <div class="text-center mb-8">
                     <span class="text-primary font-heading font-bold text-sm uppercase tracking-widest block mb-2" data-i18n="quote.subtitle">Get A Quote</span>
                     <h2 class="text-secondary font-heading font-extrabold text-2xl sm:text-3xl" data-i18n="quote.title">Request A Free Quote!</h2>
@@ -722,7 +736,7 @@
 
     <!-- TESTIMONIAL CAROUSEL SECTION -->
     <section id="testimonials" class="py-20 lg:py-28 bg-lightBg border-t border-slate-100 overflow-hidden no-print">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header Text -->
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <p class="text-primary font-heading font-bold text-sm uppercase tracking-widest mb-2" data-i18n="testimonial.subtitle">Testimonial</p>
@@ -735,7 +749,7 @@
                 <div id="testimonialContainer" class="flex transition-transform duration-500 ease-in-out">
                     <!-- Testimonial 1 -->
                     <div class="w-full flex-shrink-0 px-4">
-                        <div class="bg-white rounded-xl p-8 sm:p-10 shadow-lg relative border border-slate-100">
+                        <div class="bg-white rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg relative border border-slate-100">
                             <!-- Quotation marks icon -->
                             <div class="absolute top-6 right-8 text-slate-100 text-6xl pointer-events-none font-serif">“</div>
                             
@@ -743,7 +757,7 @@
                                 "Cargotracker has completely transformed our global distribution model. Their real-time telemetry tracking and automated customs brokerage saved us over 40 hours of administrative overhead in our first month. The transit timelines are incredibly precise."
                             </p>
                             <div class="flex items-center space-x-4">
-                                <img src="/images/client1.jpg" alt="Client 1" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.onerror=null;this.src='https://placehold.co/150x150?text=Client+1'">
+                                <img loading="lazy" decoding="async" src="/images/client1.jpg" alt="Client 1" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.onerror=null;this.src='https://placehold.co/150x150?text=Client+1'">
                                 <div>
                                     <h4 class="text-base font-heading font-bold text-secondary">Daniel Carter</h4>
                                     <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold" data-i18n="testimonial.client1_role">Logistics Manager, TechCorp</p>
@@ -754,14 +768,14 @@
 
                     <!-- Testimonial 2 -->
                     <div class="w-full flex-shrink-0 px-4">
-                        <div class="bg-white rounded-xl p-8 sm:p-10 shadow-lg relative border border-slate-100">
+                        <div class="bg-white rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg relative border border-slate-100">
                             <div class="absolute top-6 right-8 text-slate-100 text-6xl pointer-events-none font-serif">“</div>
                             
                             <p class="text-slate-600 text-base italic leading-relaxed mb-6 font-normal" data-i18n="testimonial.client2_desc">
                                 "Operating a complex, nationwide retail supply chain requires flawless timing. Cargotracker delivers consistent reliability across our road and rail operations. Their instant rate estimator makes logistics planning painless."
                             </p>
                             <div class="flex items-center space-x-4">
-                                <img src="/images/client2.jpg" alt="Client 2" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.onerror=null;this.src='https://placehold.co/150x150?text=Client+2'">
+                                <img loading="lazy" decoding="async" src="/images/client2.jpg" alt="Client 2" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.onerror=null;this.src='https://placehold.co/150x150?text=Client+2'">
                                 <div>
                                     <h4 class="text-base font-heading font-bold text-secondary">Sophia Bennett</h4>
                                     <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold" data-i18n="testimonial.client2_role">Supply Chain Dir, PrimeGoods</p>
@@ -772,14 +786,14 @@
 
                     <!-- Testimonial 3 -->
                     <div class="w-full flex-shrink-0 px-4">
-                        <div class="bg-white rounded-xl p-8 sm:p-10 shadow-lg relative border border-slate-100">
+                        <div class="bg-white rounded-xl p-6 sm:p-8 lg:p-10 shadow-lg relative border border-slate-100">
                             <div class="absolute top-6 right-8 text-slate-100 text-6xl pointer-events-none font-serif">“</div>
                             
                             <p class="text-slate-600 text-base italic leading-relaxed mb-6 font-normal" data-i18n="testimonial.client3_desc">
                                 "During a critical sea-freight customs hold, Cargotracker's dedicated support agents intervened immediately to update declaration files. Their proactive service saved us thousands in potential port delays."
                             </p>
                             <div class="flex items-center space-x-4">
-                                <img src="/images/client3.jpg" alt="Client 3" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.onerror=null;this.src='https://placehold.co/150x150?text=Client+3'">
+                                <img loading="lazy" decoding="async" src="/images/client3.jpg" alt="Client 3" class="w-14 h-14 rounded-full object-cover border-2 border-primary" onerror="this.onerror=null;this.src='https://placehold.co/150x150?text=Client+3'">
                                 <div>
                                     <h4 class="text-base font-heading font-bold text-secondary">Ethan Vance</h4>
                                     <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold" data-i18n="testimonial.client3_role">COO, GlobaRetail</p>
@@ -842,7 +856,7 @@
 
     <!-- FOOTER SECTION -->
     <footer class="bg-slate-900 text-slate-300 pt-20 pb-10 border-t border-slate-800 no-print">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                 <!-- Address / Brand Column -->
                 <div>
@@ -924,7 +938,7 @@
 
     <!-- ENTERPRISE PROOF OF DELIVERY / MANIFEST MODAL -->
     <div id="manifestModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm hidden">
-        <div class="bg-white text-slate-900 rounded-2xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <div class="bg-white text-slate-900 rounded-2xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl relative max-h-[90vh] max-h-[90dvh] overflow-y-auto">
             <!-- Modal header -->
             <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6 no-print">
                 <h3 class="font-heading font-extrabold text-lg text-secondary">
@@ -963,7 +977,7 @@
                 </div>
 
                 <!-- Specs table -->
-                <table class="w-full border-collapse border border-slate-300 text-left mb-6 font-semibold">
+                <div class="overflow-x-auto mb-6"><table class="w-full min-w-[420px] border-collapse border border-slate-300 text-left font-semibold">
                     <thead>
                         <tr class="bg-slate-200 text-slate-700 uppercase text-[9px] tracking-wider">
                             <th class="border border-slate-300 p-2" data-i18n="manifest.col_id">Tracking ID</th>
@@ -980,12 +994,12 @@
                             <td id="manDimensions" class="border border-slate-300 p-2">-</td>
                         </tr>
                     </tbody>
-                </table>
+                </table></div>
 
                 <div class="border-t border-slate-300 pt-4 flex justify-between items-center">
                     <div>
                         <p class="text-[9px] text-slate-400 font-mono tracking-wider uppercase font-bold mb-1" data-i18n="manifest.lbl_barcode">Digital Manifest Key</p>
-                        <div id="manBarcode" class="font-mono text-lg tracking-[0.1em] text-slate-900 font-light select-none">|||| || ||| | |||</div>
+                        <div id="manBarcode" class="font-mono text-base sm:text-lg tracking-[0.05em] sm:tracking-[0.1em] text-slate-900 font-light select-none break-all">|||| || ||| | |||</div>
                     </div>
                     <div class="text-right">
                         <p class="text-[10px] font-bold text-slate-800">CargoTracker Intelligence Systems Inc.</p>
@@ -1680,6 +1694,7 @@
         // Apply language choice and save configuration
         function setLanguage(lang) {
             currentLang = lang;
+            document.documentElement.lang = lang;
             localStorage.setItem('cargo_lang', lang);
 
             const labels = {
@@ -1775,6 +1790,16 @@
             currentSlideIndex = index;
             updateSlider();
         }
+
+        // Swipe left/right on touch screens
+        let touchStartX = null;
+        container.parentElement.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+        container.parentElement.addEventListener('touchend', (e) => {
+            if (touchStartX === null) return;
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            touchStartX = null;
+            if (Math.abs(dx) > 50) { dx < 0 ? nextSlide() : prevSlide(); }
+        }, { passive: true });
 
         // Auto slide every 8 seconds
         setInterval(nextSlide, 8000);
